@@ -31,17 +31,19 @@
         }
         
         .logo-container {
-            width: 250px; /* Default logo width */
+            width: 250px;
         }
         
         .logo {
             width: 100%;
             height: auto;
             transition: all 0.3s ease;
+            cursor: pointer; /* Shows it's clickable */
         }
         
         .logo:hover {
-            opacity: 0.9;
+            opacity: 0.8;
+            transform: scale(1.02);
         }
         
         /* Navigation */
@@ -62,7 +64,7 @@
         
         nav ul li a:hover,
         nav ul li a.active {
-            color: #8B5A2B; /* Warm brown accent */
+            color: #8B5A2B;
             border-bottom-color: #8B5A2B;
         }
         
@@ -82,28 +84,55 @@
         
         .hero h1 {
             font-size: 2.5rem;
-            margin-bottom: 15px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
         
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
-            margin-bottom: 25px;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* Button styles */
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         
         .btn {
             display: inline-block;
             background: #8B5A2B;
             color: white;
-            padding: 12px 30px;
+            padding: 15px 35px;
             text-decoration: none;
             border-radius: 4px;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            border: 2px solid #8B5A2B;
+            min-width: 200px;
+            text-align: center;
         }
         
         .btn:hover {
-            background: #6B3E1B;
+            background: transparent;
+            color: white;
+            border-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border-color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #8B5A2B;
+            border-color: #8B5A2B;
         }
         
         /* Responsive adjustments */
@@ -120,14 +149,25 @@
             
             nav ul {
                 justify-content: center;
+                margin-top: 15px;
             }
             
             .hero {
-                height: 60vh;
+                height: 80vh;
             }
             
             .hero h1 {
                 font-size: 2rem;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 12px;
             }
         }
     </style>
@@ -152,12 +192,15 @@
     
     <main>
         <section class="hero">
-            <h1>Professionally crafted Signs & Art for Your Home and business</h1>
-            <p>Unique, personalized decor pieces made with care in every detail</p>
-            <a href="store.html" class="btn">Browse Collections</a>
+            <h1>Custom Handcrafted Signs & Home Decor</h1>
+            <p>Beautiful, personalized pieces that tell your story</p>
+            
+            <div class="btn-container">
+                <a href="contact.html" class="btn">Contact Us</a>
+                <a href="contact.html#quote" class="btn btn-secondary">Request a Quote</a>
+                <a href="store.html" class="btn">Browse Products</a>
+            </div>
         </section>
-        
-        <!-- Additional sections can be added here -->
     </main>
     
     <footer style="background: #333; color: white; text-align: center; padding: 20px; margin-top: 40px;">
