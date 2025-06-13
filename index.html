@@ -3,15 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olani Designs - Handcrafted Signs & Art Pieces</title>
-    <p class="tagline">Handcrafted Signs & Home Decor</p>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Olani Designs - Handcrafted Signs & Home Decor</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Header styles */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo-container {
+            width: 250px; /* Default logo width */
+        }
+        
+        .logo {
+            width: 100%;
+            height: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 15px;
+            margin: 0 5px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #8B5A2B; /* Warm brown accent */
+            border-bottom-color: #8B5A2B;
+        }
+        
+        /* Hero section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('images/hero-bg.jpg') center/cover;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 25px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #8B5A2B;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #6B3E1B;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                width: 200px;
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            .hero {
+                height: 60vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="FullLogo_Transparent.png" alt="Olani Designs Logo" class="logo">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="FullLogo_Transparent.png" alt="Olani Designs Logo" class="logo">
+            </a>
         </div>
+        
         <nav>
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
@@ -21,30 +149,19 @@
             </ul>
         </nav>
     </header>
-
+    
     <main>
         <section class="hero">
             <h1>Handcrafted Signs & Art for Your Home</h1>
-            <p>Unique, personalized decor pieces made with care</p>
-            <a href="store.html" class="btn">Shop Now</a>
+            <p>Unique, personalized decor pieces made with care in every detail</p>
+            <a href="store.html" class="btn">Browse Collections</a>
         </section>
-
-        <section class="featured">
-            <h2>Featured Products</h2>
-            <div class="product-grid">
-                <!-- Featured items will go here -->
-                <div class="product-item">
-                    <img src="images/product1.jpg" alt="Custom Wooden Sign">
-                    <h3>Custom Wooden Sign</h3>
-                    <p>From $49.99</p>
-                </div>
-                <!-- Repeat for other featured items -->
-            </div>
-        </section>
+        
+        <!-- Additional sections can be added here -->
     </main>
-
-    <footer>
-        <p>&copy; 2023 Olani Designs. All rights reserved.</p>
+    
+    <footer style="background: #333; color: white; text-align: center; padding: 20px; margin-top: 40px;">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
     </footer>
 </body>
 </html>
