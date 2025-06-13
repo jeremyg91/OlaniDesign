@@ -109,3 +109,21 @@ footer {
         height: 40vh;
     }
 }
+/* Logo Styles */
+.logo {
+  max-width: 200px; /* Adjust size as needed */
+  height: auto;
+  transition: transform 0.3s ease; /* Optional hover effect */
+}
+
+.logo:hover {
+  transform: scale(1.05); /* Gentle hover animation */
+}
+
+/* For header layout */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+}
