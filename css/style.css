@@ -9,12 +9,13 @@ body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: #333;
+    background-color: #f9f9f9;
 }
 
 header {
     background: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 1rem;
+    padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,6 +23,11 @@ header {
 
 .logo img {
     height: 60px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
 }
 
 nav ul {
@@ -34,121 +40,107 @@ nav ul li a {
     color: #333;
     padding: 0.5rem 1rem;
     margin: 0 0.25rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
 }
 
-nav ul li a.active, nav ul li a:hover {
-    color: #8B5A2B; /* Warm brown color */
-    border-bottom: 2px solid #8B5A2B;
+nav ul li a.active, 
+nav ul li a:hover {
+    color: #8B5A2B;
+    border-bottom-color: #8B5A2B;
 }
 
-.hero {
-    background: url('../images/hero-bg.jpg') no-repeat center center/cover;
-    height: 60vh;
+/* Product Grid */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 30px 5%;
+}
+
+.product-card {
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    background: white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    color: #fff;
-    padding: 0 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn {
-    display: inline-block;
-    background: #8B5A2B;
-    color: #fff;
-    padding: 0.5rem 1.5rem;
-    margin-top: 1rem;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s ease;
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.btn:hover {
-    background: #6B3E1B;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-}
-
-.product-item {
-    border: 1px solid #ddd;
-    padding: 1rem;
-    text-align: center;
-}
-
-.product-item img {
+/* Product Image Styling */
+.product-card img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    max-width: 250px;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 15px;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
 }
 
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
+.product-card h3 {
+    color: #8B5A2B;
+    margin: 10px 0 5px;
+    font-size: 1.2rem;
+}
+
+.product-card .product-price {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+/* Cart Styles */
+#cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    transition: right 0.3s;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+#cart-sidebar.active {
+    right: 0;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
+        text-align: center;
     }
     
     nav ul {
         margin-top: 1rem;
+        justify-content: center;
     }
     
-    .hero {
-        height: 40vh;
+    .products {
+        grid-template-columns: 1fr;
+        padding: 20px;
     }
-}
-/* Logo Styles */
-.logo {
-  max-width: 200px; /* Adjust size as needed */
-  height: auto;
-  transition: transform 0.3s ease; /* Optional hover effect */
-}
-
-.logo:hover {
-  transform: scale(1.05); /* Gentle hover animation */
-}
-
-/* For header layout */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 5%;
-}
-/* ======================
-   PRODUCT IMAGE SIZING 
-   ====================== */
-.product-card img {
-  width: 100%;
-  max-width: 300px;  /* Adjust this value as needed */
-  height: auto;
-  display: block;
-  margin: 0 auto 15px;  /* Adds space below image */
-  border: 1px solid #f0f0f0;  /* Optional subtle border */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Optional shadow */
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .product-card img {
-    max-width: 200px;  /* Smaller on mobile */
-  }
-}
-
-/* Optional hover effect */
-.product-card img:hover {
-  transform: scale(1.02);
-  transition: transform 0.3s ease;
+    
+    .product-card img {
+        max-width: 180px;
+    }
+    
+    #cart-sidebar {
+        width: 100%;
+        max-width: 320px;
+    }
 }
