@@ -1,9 +1,42 @@
-[
-  {
-    "id": 1,
-    "name": "TEST PRODUCT",
-    "price": 10.00,
-    "description": "Test description",
-    "image": "images/honu1.HEIC"
+{
+  "products": [
+    {
+      "id": 1,
+      "sku": "HONU-001",
+      "name": "Honu Sea Turtle Necklace",
+      "price": 10.00,
+      "original_price": 14.99,
+      "currency": "USD",
+      "description": "Handcrafted sea turtle pendant symbolizing longevity and peace.",
+      "detailed_description": "Made from sterling silver with polished finish. Measures 1.5 inches. Hypoallergenic.",
+      "materials": ["sterling silver", "nickel-free"],
+      "image": "images/honu-necklace.webp",
+      "alt_images": [
+        "images/honu-necklace-closeup.webp"
+      ],
+      "category": "jewelry",
+      "subcategory": "necklaces",
+      "tags": ["turtle", "ocean", "pendant"],
+      "in_stock": true,
+      "inventory": 42,
+      "dimensions": {
+        "length": 1.5,
+        "width": 1.2,
+        "unit": "inches"
+      },
+      "weight": {
+        "value": 0.2,
+        "unit": "ounces"
+      },
+      "shipping": {
+        "free": true,
+        "ready_to_ship_in": "1-2 business days"
+      },
+      "care_instructions": "Wipe clean with soft cloth."
+    }
+  ],
+  "metadata": {
+    "last_updated": "2023-11-15",
+    "version": "1.0"
   }
-]
+}
