@@ -127,3 +127,28 @@ header {
   align-items: center;
   padding: 20px 5%;
 }
+/* ======================
+   PRODUCT IMAGE SIZING 
+   ====================== */
+.product-card img {
+  width: 100%;
+  max-width: 300px;  /* Adjust this value as needed */
+  height: auto;
+  display: block;
+  margin: 0 auto 15px;  /* Adds space below image */
+  border: 1px solid #f0f0f0;  /* Optional subtle border */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Optional shadow */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .product-card img {
+    max-width: 200px;  /* Smaller on mobile */
+  }
+}
+
+/* Optional hover effect */
+.product-card img:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
