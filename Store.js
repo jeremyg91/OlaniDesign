@@ -1,17 +1,8 @@
-// Stripe (test mode - replace with your publishable key)
-const stripe = Stripe('pk_test_your_test_key_here');
-const elements = stripe.elements();
-let cardElement;
-
-// Cart state
+// Initialize Stripe (test mode - replace with your publishable key)
+const stripe = Stripe('pk_test_your_publishable_key_here');
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Stripe card element
-    const card = elements.create('card');
-    card.mount('#card-element');
-    cardElement = card;
-    
     // Load products
     fetch('products.json')
         .then(response => response.json())
@@ -21,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
+// Product rendering (unchanged)
 function renderProducts(products) {
     const container = document.getElementById('products-container');
     
@@ -55,6 +47,7 @@ function renderProducts(products) {
     });
 }
 
+// Cart functions (unchanged)
 function addToCart(productId) {
     fetch('products.json')
         .then(response => response.json())
@@ -62,7 +55,6 @@ function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             const options = {};
             
-            // Get selected options
             document.querySelectorAll(`.product-card [data-product="${productId}"] .product-option`).forEach(select => {
                 const optionName = select.getAttribute('data-option');
                 options[optionName] = select.value;
@@ -76,7 +68,6 @@ function addToCart(productId) {
             
             saveCart();
             updateCartUI();
-            alert(`${product.name} added to cart!`);
         });
 }
 
@@ -120,26 +111,42 @@ function showCheckout() {
     document.getElementById('checkout-form').style.display = 'block';
 }
 
+// =============================================
+// STRIPE CHECKOUT IMPLEMENTATION (Option B)
+// =============================================
 async function processPayment() {
-    // Create payment intent on your server (you'll need a simple backend)
-    // For GitHub Pages, you can use a serverless function (Netlify, Vercel, etc.)
-    
-    // This is a mock implementation - in production:
-    // 1. Create a payment intent
-    // 2. Confirm the card payment
     try {
-        const { error, paymentIntent } = await stripe.confirmCardPayment('client_secret_here', {
-            payment_method: {
-                card: cardElement,
-            }
+        // 1. Show loading state
+        const btn = document.querySelector('#checkout-form button');
+        btn.disabled = true;
+        btn.textContent = 'Processing...';
+        
+        // 2. Call your backend (Netlify/Netlify/Vercel)
+        const response = await fetch('/.netlify/functions/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                cart,
+                success_url: window.location.origin + '/success.html',
+                cancel_url: window.location.href
+            })
         });
         
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        // 3. Redirect to Stripe
+        const { sessionId } = await response.json();
+        const { error } = await stripe.redirectToCheckout({ sessionId });
+        
         if (error) throw error;
-        alert('Payment successful!');
-        cart = [];
-        saveCart();
-        updateCartUI();
+        
     } catch (err) {
-        alert('Payment failed: ' + err.message);
+        alert('Checkout failed: ' + err.message);
+        console.error(err);
+        
+        // Reset button
+        const btn = document.querySelector('#checkout-form button');
+        btn.disabled = false;
+        btn.textContent = 'Pay Now';
     }
 }
