@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store - Olani Designs</title>
+    <!-- Added external CSS link -->
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://js.stripe.com/v3/"></script>
     <style>
         :root {
@@ -25,6 +27,9 @@
             padding: 20px;
             border-radius: 8px;
             transition: all 0.3s;
+            display: flex;               /* Added for better layout */
+            flex-direction: column;      /* Added for better layout */
+            align-items: center;         /* Added for better layout */
         }
         
         /* Cart Sidebar */
@@ -63,6 +68,17 @@
         @keyframes fadeInOut {
             0%, 100% { opacity: 0; }
             10%, 90% { opacity: 1; }
+        }
+
+        /* Added image styling directly as fallback */
+        .product-card img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 4px;
+            object-fit: contain;
         }
     </style>
 </head>
