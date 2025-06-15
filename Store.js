@@ -1,4 +1,4 @@
-// Initialize Stripe (test mode)
+// Stripe.js (test mode)
 const stripe = Stripe('pk_test_your_publishable_key_here');
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -16,6 +16,8 @@ async function loadProducts() {
         renderProducts(products);
     } catch (error) {
         console.error("Error loading products:", error);
+        document.getElementById('products-container').innerHTML = 
+            '<p class="error">Products failed to load. Please refresh.</p>';
     }
 }
 
@@ -23,13 +25,13 @@ async function loadProducts() {
 function renderProducts(products) {
     const container = document.getElementById('products-container');
     container.innerHTML = products.map(product => `
-        <div class="product-card">
+        <div class="product-card" data-product="${product.id}">
             <img src="${product.image}" alt="${product.name}" class="product-image">
             <h3 class="product-title">${product.name}</h3>
             <p>${product.description}</p>
             ${product.options ? product.options.map(option => `
                 <label>${option.name}</label>
-                <select class="product-option" data-option="${option.name}">
+                <select class="product-option" data-option="${option.name.toLowerCase()}">
                     ${option.values.map(value => `<option>${value}</option>`).join('')}
                 </select>
             `).join('') : ''}
@@ -47,13 +49,21 @@ function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             const options = {};
             
+            // Get selected options
             document.querySelectorAll(`[data-product="${productId}"] .product-option`).forEach(select => {
                 options[select.dataset.option] = select.value;
             });
             
-            cart.push({ ...product, options, quantity: 1 });
+            // Add to cart
+            cart.push({
+                ...product,
+                options,
+                quantity: 1
+            });
+            
             saveCart();
             updateCartUI();
+            showToast(`${product.name} added to cart!`);
         });
 }
 
@@ -68,45 +78,57 @@ function saveCart() {
 }
 
 function updateCartUI() {
+    const cartItemsEl = document.getElementById('cart-items');
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
+    // Update cart counter
     document.getElementById('cart-count').textContent = cart.length;
     document.getElementById('cart-total').textContent = total.toFixed(2);
     
-    document.getElementById('cart-items').innerHTML = cart.length ? cart.map(item => `
+    // Render cart items
+    cartItemsEl.innerHTML = cart.length ? cart.map(item => `
         <div class="cart-item">
-            <img src="${item.image}" width="60">
+            <img src="${item.image}" alt="${item.name}" width="60">
             <div>
                 <h4>${item.name}</h4>
                 <p>$${item.price.toFixed(2)} × ${item.quantity}</p>
                 ${Object.entries(item.options || {}).map(([key, val]) => 
-                    `<small>${key}: ${val}</small>`
+                    `<small>${key}: ${val}</small><br>`
                 ).join('')}
-                <button onclick="removeFromCart(${item.id})">Remove</button>
+                <button onclick="removeFromCart(${item.id})" class="remove-btn">Remove</button>
             </div>
         </div>
-    `).join('') : '<p>Your cart is empty</p>';
+    `).join('') : '<p class="empty-cart">Your cart is empty</p>';
+    
+    // Toggle checkout button
+    document.getElementById('checkout-btn').style.display = 
+        cart.length ? 'block' : 'none';
 }
 
-// UI Controls
+// UI Helpers
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.remove(), 3000);
+}
+
 function toggleCart() {
-    document.getElementById('cart').classList.toggle('active');
-}
-
-function showCheckout() {
-    document.getElementById('checkout-form').style.display = 'block';
+    document.getElementById('cart-sidebar').classList.toggle('active');
 }
 
 // Stripe Checkout
 async function processPayment() {
+    const btn = document.getElementById('checkout-btn');
     try {
         // Show loading state
-        const btn = document.querySelector('#checkout-form button');
         btn.disabled = true;
         btn.textContent = 'Processing...';
         
         // Create checkout session
-        const response = await fetch('/.netlify/functions/create-checkout-session', {
+        const response = await fetch('YOUR_NETLIFY_FUNCTION_ENDPOINT', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -116,7 +138,7 @@ async function processPayment() {
             })
         });
         
-        if (!response.ok) throw new Error('Failed to create checkout session');
+        if (!response.ok) throw new Error('Network error');
         
         // Redirect to Stripe
         const { sessionId } = await response.json();
@@ -124,25 +146,20 @@ async function processPayment() {
         
         if (error) throw error;
         
-        // Clear cart on success (redirect will happen before this)
+        // Clear cart on success (redirect happens before this)
         localStorage.removeItem('cart');
         
     } catch (error) {
         console.error("Checkout error:", error);
-        alert("Checkout failed: " + error.message);
-        
-        // Reset button
-        const btn = document.querySelector('#checkout-form button');
-        if (btn) {
-            btn.disabled = false;
-            btn.textContent = 'Pay Now';
-        }
+        alert("Payment failed: " + error.message);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Checkout Now';
     }
 }
 
-// Make functions globally available
+// Global access
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.toggleCart = toggleCart;
-window.showCheckout = showCheckout;
 window.processPayment = processPayment;
