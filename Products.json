@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Custom Wood Sign",
+    "price": 49.99,
+    "description": "Handcrafted wooden sign with custom text",
+    "image": "images/wood-sign.jpg",
+    "options": [
+      {"name": "Size", "values": ["Small (12\")", "Medium (18\")", "Large (24\")"]},
+      {"name": "Finish", "values": ["Natural", "Walnut Stain", "Whitewash"]}
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Personalized Wall Art",
+    "price": 34.99,
+    "description": "Custom name or quote wall decoration",
+    "image": "images/wall-art.jpg"
+  }
+]
