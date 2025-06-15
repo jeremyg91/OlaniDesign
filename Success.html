@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Olani Designs</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f9f9f9;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .confirmation {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #8B5A2B;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: #8B5A2B;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #6B3E1B;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation">
+        <h1>🎉 Order Confirmed!</h1>
+        <p>Thank you for your purchase. Your custom order is now being processed.</p>
+        <p>We've sent a confirmation to your email.</p>
+        <p><strong>Order ID:</strong> <span id="order-id"></span></p>
+        <a href="store.html" class="btn">Continue Shopping</a>
+    </div>
+
+    <script>
+        // Display order ID from URL (if present)
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+        
+        if (sessionId) {
+            document.getElementById('order-id').textContent = sessionId.slice(0, 8);
+            
+            // Clear cart
+            localStorage.removeItem('cart');
+        }
+    </script>
+</body>
+</html>
