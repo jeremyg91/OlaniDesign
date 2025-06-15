@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store - Olani Designs</title>
+    <!-- Stripe.js (test mode) -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        :root {
+            --primary: #8B5A2B;
+            --secondary: #333;
+            --light: #f9f9f9;
+        }
+        
+        /* [Previous CSS remains the same] */
+        
+        /* New Cart Styles */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .cart-overlay.active {
+            transform: translateX(0);
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 20px 0;
+            text-align: right;
+        }
+        
+        #checkout-form {
+            display: none;
+        }
+        
+        .cart-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+    <!-- [Previous header remains the same] -->
+
+    <button class="cart-toggle" onclick="toggleCart()">
+        🛒 <span id="cart-count">0</span>
+    </button>
+
+    <div class="cart-overlay" id="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <div class="cart-total">
+            Total: $<span id="cart-total">0.00</span>
+        </div>
+        
+        <button class="btn" onclick="showCheckout()">Checkout</button>
+        
+        <form id="checkout-form">
+            <h3>Shipping Info</h3>
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="text" placeholder="Address" required>
+            
+            <div id="card-element"></div>
+            <button type="button" class="btn" onclick="processPayment()">Pay Now</button>
+        </form>
+    </div>
+
+    <main>
+        <div class="products" id="products-container"></div>
+    </main>
+
+    <script src="store.js"></script>
+</body>
+</html>
