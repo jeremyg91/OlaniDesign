@@ -41,36 +41,49 @@ function renderProducts(products) {
     `).join('');
 }
 
-// Cart Management
+// Enhanced Cart Logic
 function addToCart(productId) {
     fetch('products.json')
         .then(response => response.json())
         .then(products => {
             const product = products.find(p => p.id === productId);
-            const options = {};
-            
-            // Get selected options
-            document.querySelectorAll(`[data-product="${productId}"] .product-option`).forEach(select => {
-                options[select.dataset.option] = select.value;
-            });
-            
-            // Add to cart
-            cart.push({
-                ...product,
-                options,
-                quantity: 1
-            });
+            const existingItem = cart.find(item => 
+                item.id === productId && 
+                JSON.stringify(item.options) === JSON.stringify(getSelectedOptions(productId))
+            );
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1,
+                    options: getSelectedOptions(productId)
+                });
+            }
             
             saveCart();
             updateCartUI();
-            showToast(`${product.name} added to cart!`);
+            showToast(existingItem ? 
+                `Updated ${product.name} quantity` : 
+                `Added ${product.name} to cart`);
         });
 }
 
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
+function getSelectedOptions(productId) {
+    const options = {};
+    document.querySelectorAll(`[data-product="${productId}"] .product-option`)
+        .forEach(select => {
+            options[select.dataset.option] = select.value;
+        });
+    return options;
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
     saveCart();
     updateCartUI();
+    showToast("Item removed");
 }
 
 function saveCart() {
@@ -81,26 +94,29 @@ function updateCartUI() {
     const cartItemsEl = document.getElementById('cart-items');
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
-    // Update cart counter
-    document.getElementById('cart-count').textContent = cart.length;
+    // Cart badge animation
+    const badge = document.getElementById('cart-count');
+    badge.style.transform = 'scale(1.2)';
+    setTimeout(() => badge.style.transform = 'scale(1)', 300);
+    
+    // Update UI
+    document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById('cart-total').textContent = total.toFixed(2);
     
-    // Render cart items
-    cartItemsEl.innerHTML = cart.length ? cart.map(item => `
+    cartItemsEl.innerHTML = cart.length ? cart.map((item, index) => `
         <div class="cart-item">
-            <img src="${item.image}" alt="${item.name}" width="60">
+            <img src="${item.image}" width="60">
             <div>
-                <h4>${item.name}</h4>
-                <p>$${item.price.toFixed(2)} × ${item.quantity}</p>
+                <h4>${item.name} × ${item.quantity}</h4>
+                <p>$${(item.price * item.quantity).toFixed(2)}</p>
                 ${Object.entries(item.options || {}).map(([key, val]) => 
                     `<small>${key}: ${val}</small><br>`
                 ).join('')}
-                <button onclick="removeFromCart(${item.id})" class="remove-btn">Remove</button>
+                <button onclick="removeFromCart(${index})" class="remove-btn">Remove</button>
             </div>
         </div>
     `).join('') : '<p class="empty-cart">Your cart is empty</p>';
     
-    // Toggle checkout button
     document.getElementById('checkout-btn').style.display = 
         cart.length ? 'block' : 'none';
 }
@@ -111,7 +127,6 @@ function showToast(message) {
     toast.className = 'toast';
     toast.textContent = message;
     document.body.appendChild(toast);
-    
     setTimeout(() => toast.remove(), 3000);
 }
 
@@ -123,11 +138,9 @@ function toggleCart() {
 async function processPayment() {
     const btn = document.getElementById('checkout-btn');
     try {
-        // Show loading state
         btn.disabled = true;
         btn.textContent = 'Processing...';
         
-        // Create checkout session
         const response = await fetch('YOUR_NETLIFY_FUNCTION_ENDPOINT', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -138,19 +151,12 @@ async function processPayment() {
             })
         });
         
-        if (!response.ok) throw new Error('Network error');
-        
-        // Redirect to Stripe
         const { sessionId } = await response.json();
         const { error } = await stripe.redirectToCheckout({ sessionId });
         
         if (error) throw error;
-        
-        // Clear cart on success (redirect happens before this)
         localStorage.removeItem('cart');
-        
     } catch (error) {
-        console.error("Checkout error:", error);
         alert("Payment failed: " + error.message);
     } finally {
         btn.disabled = false;
