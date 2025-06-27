@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olani Designs - Handcrafted Signs & Home Decor</title>
+    <title>Olani Designs - Professional Signage & Custom Decor Solutions</title>
     <style>
         /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Montserrat', 'Arial', sans-serif;
         }
         
         body {
@@ -28,6 +28,9 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .logo-container {
@@ -38,7 +41,7 @@
             width: 100%;
             height: auto;
             transition: all 0.3s ease;
-            cursor: pointer; /* Shows it's clickable */
+            cursor: pointer;
         }
         
         .logo:hover {
@@ -57,22 +60,22 @@
             color: #333;
             padding: 8px 15px;
             margin: 0 5px;
-            font-weight: 500;
+            font-weight: 600;
             border-bottom: 2px solid transparent;
             transition: all 0.3s ease;
         }
         
         nav ul li a:hover,
         nav ul li a.active {
-            color: #8B5A2B;
-            border-bottom-color: #8B5A2B;
+            color: #2B5A8B; /* Dark blue instead of brown */
+            border-bottom-color: #2B5A8B;
         }
         
         /* Hero section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                        url('images/hero-bg.jpg') center/cover;
-            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('images/hero-signs.jpg') center/cover;
+            height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -83,19 +86,19 @@
         }
         
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         }
         
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
+            font-size: 1.4rem;
+            max-width: 700px;
             margin-bottom: 40px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
         
-        /* Button styles */
+        /* Button styles - Updated to dark blue */
         .btn-container {
             display: flex;
             gap: 20px;
@@ -105,24 +108,24 @@
         
         .btn {
             display: inline-block;
-            background: #8B5A2B;
+            background: #2B5A8B; /* Dark blue */
             color: white;
             padding: 15px 35px;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 50px;
             font-weight: bold;
             transition: all 0.3s;
-            border: 2px solid #8B5A2B;
+            border: 2px solid #2B5A8B;
             min-width: 200px;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
         .btn:hover {
-            background: transparent;
-            color: white;
-            border-color: white;
+            background: #1E4161;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 7px 15px rgba(0,0,0,0.2);
+            border-color: #1E4161;
         }
         
         .btn-secondary {
@@ -131,8 +134,29 @@
         }
         
         .btn-secondary:hover {
-            background: #8B5A2B;
-            border-color: #8B5A2B;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* New Trust Badges */
+        .trust-badges {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .trust-badges span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        
+        .trust-badges span:before {
+            content: "✓";
+            color: #E8B20F; /* Gold checkmark */
+            font-weight: bold;
         }
         
         /* Responsive adjustments */
@@ -153,16 +177,22 @@
             }
             
             .hero {
-                height: 80vh;
+                height: 90vh;
+                padding: 0 15px;
             }
             
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
             }
             
             .btn-container {
                 flex-direction: column;
                 gap: 15px;
+                width: 100%;
             }
             
             .btn {
@@ -171,40 +201,4 @@
             }
         }
     </style>
-</head>
-<body>
-    <header>
-        <div class="logo-container">
-            <a href="index.html">
-                <img src="FullLogo_Transparent.png" alt="Olani Designs Logo" class="logo">
-            </a>
-        </div>
-        
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="store.html">Store</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section class="hero">
-            <h1>Custom Signs & Home Decor</h1>
-            <p>Beautiful pieces tailored for your home or business</p>
-            
-            <div class="btn-container">
-                <a href="contact.html" class="btn">Contact Us</a>
-                <a href="contact.html#quote" class="btn btn-secondary">Request a Quote</a>
-                <a href="store.html" class="btn">Browse Products</a>
-            </div>
-        </section>
-    </main>
-    
-    <footer style="background: #333; color: white; text-align: center; padding: 20px; margin-top: 40px;">
-        <p>&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:w
