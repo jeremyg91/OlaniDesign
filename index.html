@@ -67,14 +67,13 @@
         
         nav ul li a:hover,
         nav ul li a.active {
-            color: #2B5A8B; /* Dark blue instead of brown */
+            color: #2B5A8B;
             border-bottom-color: #2B5A8B;
         }
         
-        /* Hero section */
+        /* Hero section with slideshow */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('images/alohagirl1.jpg') center/cover;
+            background-color: #ccc; /* Fallback color */
             height: 80vh;
             display: flex;
             flex-direction: column;
@@ -83,22 +82,45 @@
             text-align: center;
             color: white;
             padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: -1;
+        }
+        
+        .hero-background.active {
+            opacity: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         }
         
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         }
         
         .hero p {
             font-size: 1.4rem;
             max-width: 700px;
             margin-bottom: 40px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
         
-        /* Button styles - Updated to dark blue */
+        /* Button styles */
         .btn-container {
             display: flex;
             gap: 20px;
@@ -108,7 +130,7 @@
         
         .btn {
             display: inline-block;
-            background: #2B5A8B; /* Dark blue */
+            background: #2B5A8B;
             color: white;
             padding: 15px 35px;
             text-decoration: none;
@@ -137,7 +159,7 @@
             background: rgba(255,255,255,0.1);
         }
         
-        /* New Trust Badges */
+        /* Trust Badges */
         .trust-badges {
             display: flex;
             gap: 25px;
@@ -155,7 +177,7 @@
         
         .trust-badges span:before {
             content: "✓";
-            color: #E8B20F; /* Gold checkmark */
+            color: #E8B20F;
             font-weight: bold;
         }
         
@@ -223,18 +245,21 @@
     
     <main>
         <section class="hero">
-            <h1>Premium Signage & Custom Decor Solutions</h1>
-            <p>Professional-grade signs and home decor tailored to elevate your space and brand identity</p>
-            
-            <div class="btn-container">
-                <a href="contact.html" class="btn">Get a Custom Quote</a>
-                <a href="store.html" class="btn btn-secondary">View Our Collections</a>
-            </div>
-            
-            <div class="trust-badges">
-                <span>10+ Years Experience</span>
-                <span>Locally Crafted</span>
-                <span>Free Design Consultations</span>
+            <!-- Background images will be inserted here by JavaScript -->
+            <div class="hero-content">
+                <h1>Premium Signage & Custom Decor Solutions</h1>
+                <p>Professional-grade signs and home decor tailored to elevate your space and brand identity</p>
+                
+                <div class="btn-container">
+                    <a href="contact.html" class="btn">Get a Custom Quote</a>
+                    <a href="store.html" class="btn btn-secondary">View Our Collections</a>
+                </div>
+                
+                <div class="trust-badges">
+                    <span>10+ Years Experience</span>
+                    <span>Locally Crafted</span>
+                    <span>Free Design Consultations</span>
+                </div>
             </div>
         </section>
     </main>
@@ -243,5 +268,32 @@
         <p style="margin-bottom: 15px; font-size: 1.1rem;">&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
         <p style="font-size: 0.9rem; opacity: 0.8;">Professional signage solutions for homes and businesses across [Your Location]</p>
     </footer>
+
+    <script>
+        // Image slideshow configuration
+        const heroImages = [
+            'images/alohagirl1.jpg',
+            'images/alohagirl2.jpg', // Add your second image
+            'images/alohagirl3.jpg'  // Add your third image
+        ];
+        
+        // Create background elements
+        heroImages.forEach((imageUrl, index) => {
+            const bgDiv = document.createElement('div');
+            bgDiv.className = 'hero-background';
+            bgDiv.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${imageUrl}')`;
+            if (index === 0) bgDiv.classList.add('active');
+            document.querySelector('.hero').prepend(bgDiv);
+        });
+        
+        // Cycle through images every 5 seconds
+        let currentIndex = 0;
+        setInterval(() => {
+            const backgrounds = document.querySelectorAll('.hero-background');
+            backgrounds[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % backgrounds.length;
+            backgrounds[currentIndex].classList.add('active');
+        }, 5000);
+    </script>
 </body>
 </html>
