@@ -270,30 +270,72 @@
     </footer>
 
     <script>
-        // Image slideshow configuration
+        // Image slideshow configuration - USING YOUR EXACT FILENAMES
         const heroImages = [
-            'images/alohagirl1.jpg',
-            'images/kingofd.jpg', // Add your second image
-            'images/leigirl1.jpg'  // Add your third image
+            './images/alohagirl1.jpg',
+            './images/alohagirl2.jpg',
+            './images/Leigirl1.jpg',
+            './images/honu1.jpg',
+            './images/kingofd.jpg'
         ];
-        
-        // Create background elements
+
+        // Create background elements with error handling
         heroImages.forEach((imageUrl, index) => {
             const bgDiv = document.createElement('div');
             bgDiv.className = 'hero-background';
+            
+            // Add debug text that will show if image fails to load
+            bgDiv.textContent = `Image ${index+1}: ${imageUrl.split('/').pop()}`;
+            bgDiv.style.color = 'white';
+            bgDiv.style.display = 'flex';
+            bgDiv.style.alignItems = 'center';
+            bgDiv.style.justifyContent = 'center';
+            bgDiv.style.fontSize = '2rem';
+            bgDiv.style.fontWeight = 'bold';
+            bgDiv.style.textShadow = '2px 2px 4px rgba(0,0,0,0.7)';
+            
             bgDiv.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${imageUrl}')`;
+            
             if (index === 0) bgDiv.classList.add('active');
             document.querySelector('.hero').prepend(bgDiv);
+            
+            // Log creation for debugging
+            console.log(`Created slide for: ${imageUrl}`);
         });
-        
+
         // Cycle through images every 5 seconds
         let currentIndex = 0;
-        setInterval(() => {
+        const slideInterval = setInterval(() => {
             const backgrounds = document.querySelectorAll('.hero-background');
+            if (!backgrounds.length) {
+                console.error("No slides found!");
+                clearInterval(slideInterval);
+                return;
+            }
+            
             backgrounds[currentIndex].classList.remove('active');
             currentIndex = (currentIndex + 1) % backgrounds.length;
             backgrounds[currentIndex].classList.add('active');
+            
+            // Log current slide for debugging
+            console.log(`Now showing: ${heroImages[currentIndex]}`);
         }, 5000);
+
+        // Initial debug check
+        setTimeout(() => {
+            const loadedSlides = document.querySelectorAll('.hero-background');
+            console.log(`Total slides loaded: ${loadedSlides.length}/${heroImages.length}`);
+            
+            if (loadedSlides.length !== heroImages.length) {
+                console.warn("Some slides failed to load!");
+                console.warn("Check these paths:");
+                heroImages.forEach((img, i) => {
+                    if (!document.querySelector(`.hero-background[style*="${img}"]`)) {
+                        console.warn(`Missing: ${img}`);
+                    }
+                });
+            }
+        }, 1000);
     </script>
 </body>
 </html>
