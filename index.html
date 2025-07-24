@@ -5,21 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olani Designs - Professional Signage & Custom Decor Solutions</title>
     <style>
-        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Montserrat', 'Arial', sans-serif;
         }
-        
         body {
             line-height: 1.6;
             color: #333;
             background-color: #f9f9f9;
         }
-        
-        /* Header styles */
         header {
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -32,29 +28,23 @@
             top: 0;
             z-index: 100;
         }
-        
         .logo-container {
             width: 250px;
         }
-        
         .logo {
             width: 100%;
             height: auto;
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        
         .logo:hover {
             opacity: 0.8;
             transform: scale(1.02);
         }
-        
-        /* Navigation */
         nav ul {
             display: flex;
             list-style: none;
         }
-        
         nav ul li a {
             text-decoration: none;
             color: #333;
@@ -64,16 +54,13 @@
             border-bottom: 2px solid transparent;
             transition: all 0.3s ease;
         }
-        
         nav ul li a:hover,
         nav ul li a.active {
             color: #2B5A8B;
             border-bottom-color: #2B5A8B;
         }
-        
-        /* Hero section with slideshow */
         .hero {
-            background-color: #ccc; /* Fallback color */
+            background-color: #ccc;
             height: 80vh;
             display: flex;
             flex-direction: column;
@@ -85,7 +72,6 @@
             position: relative;
             overflow: hidden;
         }
-        
         .hero-background {
             position: absolute;
             top: 0;
@@ -98,36 +84,29 @@
             transition: opacity 1s ease-in-out;
             z-index: -1;
         }
-        
         .hero-background.active {
             opacity: 1;
         }
-        
         .hero-content {
             position: relative;
             z-index: 1;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         }
-        
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 20px;
         }
-        
         .hero p {
             font-size: 1.4rem;
             max-width: 700px;
             margin-bottom: 40px;
         }
-        
-        /* Button styles */
         .btn-container {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
             justify-content: center;
         }
-        
         .btn {
             display: inline-block;
             background: #2B5A8B;
@@ -142,24 +121,19 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        
         .btn:hover {
             background: #1E4161;
             transform: translateY(-3px);
             box-shadow: 0 7px 15px rgba(0,0,0,0.2);
             border-color: #1E4161;
         }
-        
         .btn-secondary {
             background: transparent;
             border-color: white;
         }
-        
         .btn-secondary:hover {
             background: rgba(255,255,255,0.1);
         }
-        
-        /* Trust Badges */
         .trust-badges {
             display: flex;
             gap: 25px;
@@ -167,56 +141,45 @@
             margin-top: 30px;
             flex-wrap: wrap;
         }
-        
         .trust-badges span {
             display: flex;
             align-items: center;
             gap: 8px;
             font-weight: 500;
         }
-        
         .trust-badges span:before {
             content: "✓";
             color: #E8B20F;
             font-weight: bold;
         }
-        
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 text-align: center;
             }
-            
             .logo-container {
                 width: 200px;
                 margin-bottom: 15px;
             }
-            
             nav ul {
                 justify-content: center;
                 margin-top: 15px;
             }
-            
             .hero {
                 height: 90vh;
                 padding: 0 15px;
             }
-            
             .hero h1 {
                 font-size: 2.2rem;
             }
-            
             .hero p {
                 font-size: 1.1rem;
             }
-            
             .btn-container {
                 flex-direction: column;
                 gap: 15px;
                 width: 100%;
             }
-            
             .btn {
                 width: 100%;
                 padding: 12px;
@@ -226,116 +189,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <a href="index.html">
-                <img src="FullLogo_Transparent.png" alt="Olani Designs Logo" class="logo">
-            </a>
-        </div>
-        
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="store.html">Store</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section class="hero">
-            <!-- Background images will be inserted here by JavaScript -->
-            <div class="hero-content">
-                <h1>Premium Signage & Custom Decor Solutions</h1>
-                <p>Professional-grade signs and home decor tailored to elevate your space and brand identity</p>
-                
-                <div class="btn-container">
-                    <a href="contact.html" class="btn">Get a Custom Quote</a>
-                    <a href="store.html" class="btn btn-secondary">View Our Collections</a>
-                </div>
-                
-                <div class="trust-badges">
-                    <span>10+ Years Experience</span>
-                    <span>Locally Crafted</span>
-                    <span>Free Design Consultations</span>
-                </div>
+<header>
+    <div class="logo-container">
+        <a href="index.html">
+            <img src="FullLogo_Transparent.png" alt="Olani Designs Logo" class="logo">
+        </a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="gallery.html">Our Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Premium Signage & Custom Decor Solutions</h1>
+            <p>Professional-grade signs and home decor tailored to elevate your space and brand identity</p>
+            <div class="btn-container">
+                <a href="contact.html" class="btn">Get a Custom Quote</a>
+                <a href="gallery.html" class="btn btn-secondary">See Our Work</a>
             </div>
-        </section>
-    </main>
-    
-    <footer style="background: #2B5A8B; color: white; text-align: center; padding: 30px; margin-top: 60px;">
-        <p style="margin-bottom: 15px; font-size: 1.1rem;">&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
-        <p style="font-size: 0.9rem; opacity: 0.8;">Professional signage solutions for homes and businesses across [Your Location]</p>
-    </footer>
-
-    <script>
-        // Image slideshow configuration - USING YOUR EXACT FILENAMES
-        const heroImages = [
-            './images/alohagirl1.jpg',
-            './images/alohagirl2.jpg',
-            './images/Leigirl1.jpg',
-            './images/honu1.jpg',
-            './images/kingofd.jpg'
-        ];
-
-        // Create background elements with error handling
-        heroImages.forEach((imageUrl, index) => {
-            const bgDiv = document.createElement('div');
-            bgDiv.className = 'hero-background';
-            
-            // Add debug text that will show if image fails to load
-            bgDiv.textContent = `Image ${index+1}: ${imageUrl.split('/').pop()}`;
-            bgDiv.style.color = 'white';
-            bgDiv.style.display = 'flex';
-            bgDiv.style.alignItems = 'center';
-            bgDiv.style.justifyContent = 'center';
-            bgDiv.style.fontSize = '2rem';
-            bgDiv.style.fontWeight = 'bold';
-            bgDiv.style.textShadow = '2px 2px 4px rgba(0,0,0,0.7)';
-            
-            bgDiv.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${imageUrl}')`;
-            
-            if (index === 0) bgDiv.classList.add('active');
-            document.querySelector('.hero').prepend(bgDiv);
-            
-            // Log creation for debugging
-            console.log(`Created slide for: ${imageUrl}`);
-        });
-
-        // Cycle through images every 5 seconds
-        let currentIndex = 0;
-        const slideInterval = setInterval(() => {
-            const backgrounds = document.querySelectorAll('.hero-background');
-            if (!backgrounds.length) {
-                console.error("No slides found!");
-                clearInterval(slideInterval);
-                return;
-            }
-            
-            backgrounds[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % backgrounds.length;
-            backgrounds[currentIndex].classList.add('active');
-            
-            // Log current slide for debugging
-            console.log(`Now showing: ${heroImages[currentIndex]}`);
-        }, 5000);
-
-        // Initial debug check
-        setTimeout(() => {
-            const loadedSlides = document.querySelectorAll('.hero-background');
-            console.log(`Total slides loaded: ${loadedSlides.length}/${heroImages.length}`);
-            
-            if (loadedSlides.length !== heroImages.length) {
-                console.warn("Some slides failed to load!");
-                console.warn("Check these paths:");
-                heroImages.forEach((img, i) => {
-                    if (!document.querySelector(`.hero-background[style*="${img}"]`)) {
-                        console.warn(`Missing: ${img}`);
-                    }
-                });
-            }
-        }, 1000);
-    </script>
+            <div class="trust-badges">
+                <span>10+ Years Experience</span>
+                <span>Locally Crafted</span>
+                <span>Free Design Consultations</span>
+            </div>
+        </div>
+    </section>
+</main>
+<footer style="background: #2B5A8B; color: white; text-align: center; padding: 30px; margin-top: 60px;">
+    <p style="margin-bottom: 15px; font-size: 1.1rem;">&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
+    <p style="font-size: 0.9rem; opacity: 0.8;">Professional signage solutions for homes and businesses across [Your Location]</p>
+</footer>
+<script>
+    const heroImages = [
+        './images/alohagirl1.jpg',
+        './images/alohagirl2.jpg',
+        './images/Leigirl1.jpg',
+        './images/honu1.jpg',
+        './images/kingofd.jpg'
+    ];
+    heroImages.forEach((imageUrl, index) => {
+        const bgDiv = document.createElement('div');
+        bgDiv.className = 'hero-background';
+        bgDiv.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${imageUrl}')`;
+        if (index === 0) bgDiv.classList.add('active');
+        document.querySelector('.hero').prepend(bgDiv);
+    });
+    let currentIndex = 0;
+    setInterval(() => {
+        const backgrounds = document.querySelectorAll('.hero-background');
+        backgrounds[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % backgrounds.length;
+        backgrounds[currentIndex].classList.add('active');
+    }, 5000);
+</script>
 </body>
 </html>
