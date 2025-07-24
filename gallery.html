@@ -90,6 +90,7 @@
             align-items: center;
             z-index: 1000;
             overflow: hidden;
+            flex-direction: column;
         }
         .modal.active { display: flex; }
         .modal img {
@@ -99,14 +100,27 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             transition: transform 0.3s;
         }
-        .close {
+        .close, .prev, .next {
             position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: white;
+            background: rgba(0,0,0,0.4);
+            border-radius: 50%;
+            padding: 10px 15px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .close {
             top: 20px;
             right: 40px;
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
-            z-index: 1001;
+            transform: none;
+        }
+        .prev { left: 20px; }
+        .next { right: 20px; }
+        .prev:hover, .next:hover, .close:hover {
+            background: rgba(0,0,0,0.7);
         }
         footer {
             background: #2B5A8B;
@@ -141,7 +155,9 @@
 
 <div class="modal" id="modal">
     <span class="close" onclick="closeModal()">&times;</span>
+    <span class="prev" onclick="changeImage(-1)">&#10094;</span>
     <img id="modal-img" src="">
+    <span class="next" onclick="changeImage(1)">&#10095;</span>
 </div>
 
 <footer>
@@ -156,25 +172,33 @@
     let galleryList = [];
 
     // ✅ Replace these with YOUR GitHub details:
-    const username = "jeremyg91";  // your GitHub username
-    const repo = "OlaniDesign";   // your repo name
-    const branch = "main";        // usually "main" or "master"
-    const folder = "images";      // folder where images are stored
+    const username = "jeremyg91";   // your GitHub username
+    const repo = "OlaniDesign";    // your repo name
+    const branch = "main";         // usually "main" or "master"
+    const folder = "images";       // folder where images are stored
 
     async function loadImages() {
         const url = `https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=${branch}`;
         const res = await fetch(url);
         const files = await res.json();
+
+        // Fetch captions JSON if exists
+        let captions = {};
+        try {
+            const capRes = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/${branch}/${folder}/gallery.json`);
+            if(capRes.ok) captions = await capRes.json();
+        } catch (e) { console.warn("No gallery.json found, using filenames as captions."); }
+
         galleryList = files
             .filter(file => file.type === "file" && /\.(jpe?g|png|gif)$/i.test(file.name))
-            .map(file => file.download_url);
+            .map(file => ({ src: file.download_url, name: file.name }));
 
-        galleryList.forEach((src, index) => {
+        galleryList.forEach((item, index) => {
+            const captionText = captions[item.name] || item.name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ');
             const div = document.createElement('div');
             div.className = 'gallery-item';
-            const captionText = src.split('/').pop().replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ');
             div.innerHTML = `
-                <img src="${src}" alt="${captionText}" onclick="openModal(${index})">
+                <img src="${item.src}" alt="${captionText}" onclick="openModal(${index})">
                 <div class="caption">${captionText}</div>
             `;
             galleryGrid.appendChild(div);
@@ -184,21 +208,21 @@
     function openModal(index) {
         currentIndex = index;
         modal.classList.add('active');
-        modalImg.src = galleryList[currentIndex];
+        modalImg.src = galleryList[currentIndex].src;
     }
     function closeModal() { modal.classList.remove('active'); }
+    function changeImage(direction) {
+        currentIndex = (currentIndex + direction + galleryList.length) % galleryList.length;
+        modalImg.src = galleryList[currentIndex].src;
+    }
 
     // ✅ SWIPE SUPPORT (Mobile)
     let startX = 0;
     modal.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     modal.addEventListener('touchend', e => {
         let endX = e.changedTouches[0].clientX;
-        if (endX - startX > 50) { // swipe right
-            currentIndex = (currentIndex - 1 + galleryList.length) % galleryList.length;
-        } else if (startX - endX > 50) { // swipe left
-            currentIndex = (currentIndex + 1) % galleryList.length;
-        }
-        modalImg.src = galleryList[currentIndex];
+        if (endX - startX > 50) changeImage(-1);      // swipe right
+        else if (startX - endX > 50) changeImage(1);  // swipe left
     });
 
     loadImages();
