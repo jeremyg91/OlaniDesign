@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Work - Olani Designs</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            width: 200px;
+        }
+
+        .logo {
+            width: 100%;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 15px;
+            margin: 0 5px;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #2B5A8B;
+            border-bottom: 2px solid #2B5A8B;
+        }
+
+        .gallery-container {
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #2B5A8B;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Modal Lightbox */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .modal:target {
+            display: flex;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #2B5A8B;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <a href="index.html"><img src="FullLogo_Transparent.png" alt="Olani Designs" class="logo"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html" class="active">Our Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="gallery-container">
+    <h1 class="gallery-title">Our Work</h1>
+    <div class="gallery-grid" id="gallery-grid">
+        <!-- Images will be dynamically inserted by JavaScript -->
+    </div>
+</main>
+
+<footer>
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
+</footer>
+
+<script>
+    // ✅ Dynamic Gallery - just add images to the array
+    const galleryImages = [
+        {src: './images/sample1.jpg', alt: 'Custom Wooden Sign'},
+        {src: './images/sample2.jpg', alt: 'Hawaiian Style Cafe Sign'},
+        {src: './images/sample3.jpg', alt: 'Business Branding Sign'},
+        {src: './images/sample4.jpg', alt: 'Custom Name Plaque'}
+    ];
+
+    const galleryGrid = document.getElementById('gallery-grid');
+
+    galleryImages.forEach((img, index) => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.innerHTML = `
+            <a href="#modal-${index}">
+                <img src="${img.src}" alt="${img.alt}">
+            </a>
+            <div id="modal-${index}" class="modal">
+                <span class="close" onclick="window.location.hash='';">&times;</span>
+                <img src="${img.src}" alt="${img.alt}">
+            </div>
+        `;
+        galleryGrid.appendChild(div);
+    });
+</script>
+</body>
+</html>
