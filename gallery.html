@@ -1,231 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Work - Olani Designs</title>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: #f9f9f9;
-            margin: 0;
-            color: #333;
-        }
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo-container { width: 200px; }
-        .logo { width: 100%; }
-        nav ul { list-style: none; display: flex; }
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            padding: 8px 15px;
-            margin: 0 5px;
-            font-weight: 600;
-            border-bottom: 2px solid transparent;
-            transition: 0.3s;
-        }
-        nav ul li a:hover, nav ul li a.active {
-            color: #2B5A8B;
-            border-bottom: 2px solid #2B5A8B;
-        }
-        .gallery-container {
-            padding: 60px 5%;
-            max-width: 1200px;
-            margin: auto;
-        }
-        .gallery-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            color: #2B5A8B;
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .gallery-item {
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .gallery-item img {
-            width: 100%;
-            display: block;
-            transition: transform 0.3s;
-        }
-        .gallery-item:hover img { transform: scale(1.05); }
-        .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            text-align: center;
-            padding: 8px;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .gallery-item:hover .caption { opacity: 1; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Work - Olani Designs</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      color: #333;
+    }
+    header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-container { width: 200px; }
+    .logo { width: 100%; }
+    nav ul { list-style: none; display: flex; }
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      padding: 8px 15px;
+      margin: 0 5px;
+      font-weight: 600;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    nav ul li a:hover, nav ul li a.active {
+      color: #2B5A8B;
+      border-bottom: 2px solid #2B5A8B;
+    }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            overflow: hidden;
-            flex-direction: column;
-        }
-        .modal.active { display: flex; }
-        .modal img {
-            max-width: 90%;
-            max-height: 80%;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transition: transform 0.3s;
-        }
-        .close, .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2.5rem;
-            color: white;
-            background: rgba(0,0,0,0.4);
-            border-radius: 50%;
-            padding: 10px 15px;
-            cursor: pointer;
-            user-select: none;
-        }
-        .close {
-            top: 20px;
-            right: 40px;
-            transform: none;
-        }
-        .prev { left: 20px; }
-        .next { right: 20px; }
-        .prev:hover, .next:hover, .close:hover {
-            background: rgba(0,0,0,0.7);
-        }
-        footer {
-            background: #2B5A8B;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-    </style>
+    .gallery-container {
+      padding: 60px 5%;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .gallery-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #2B5A8B;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .gallery-item {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      text-align: center;
+      padding: 8px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .caption { opacity: 1; }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      overflow: hidden;
+      flex-direction: column;
+    }
+    .modal.active { display: flex; }
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s;
+    }
+    .modal .caption-box {
+      color: #fff;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .caption-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .caption-desc {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+    .close, .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      color: white;
+      background: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      padding: 10px 15px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .close {
+      top: 20px;
+      right: 40px;
+      transform: none;
+    }
+    .prev { left: 20px; }
+    .next { right: 20px; }
+    .prev:hover, .next:hover, .close:hover {
+      background: rgba(0,0,0,0.7);
+    }
+
+    footer {
+      background: #2B5A8B;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
 <header>
-    <div class="logo-container">
-        <a href="index.html"><img src="FullLogo_Transparent.png" alt="Olani Designs" class="logo"></a>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="gallery.html" class="active">Our Work</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+  <div class="logo-container">
+    <a href="index.html"><img src="FullLogo_Transparent.png" alt="Olani Designs" class="logo"></a>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html" class="active">Our Work</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 </header>
 
 <main class="gallery-container">
-    <h1 class="gallery-title">Our Work</h1>
-    <div class="gallery-grid" id="gallery-grid">
-        <!-- Images load automatically -->
-    </div>
+  <h1 class="gallery-title">Our Work</h1>
+  <div class="gallery-grid" id="gallery-grid"></div>
 </main>
 
 <div class="modal" id="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <span class="prev" onclick="changeImage(-1)">&#10094;</span>
-    <img id="modal-img" src="">
-    <span class="next" onclick="changeImage(1)">&#10095;</span>
+  <span class="close" onclick="closeModal()">&times;</span>
+  <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+  <img id="modal-img" src="">
+  <div class="caption-box">
+    <div id="modal-title" class="caption-title"></div>
+    <div id="modal-desc" class="caption-desc"></div>
+  </div>
+  <span class="next" onclick="changeImage(1)">&#10095;</span>
 </div>
 
 <footer>
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
+  <p>&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
 </footer>
 
 <script>
-    const galleryGrid = document.getElementById('gallery-grid');
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modal-img');
-    let currentIndex = 0;
-    let galleryList = [];
+const galleryGrid = document.getElementById('gallery-grid');
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modal-img');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-desc');
+let currentIndex = 0;
+let galleryList = [];
 
-    // ✅ Replace these with YOUR GitHub details:
-    const username = "jeremyg91";   // your GitHub username
-    const repo = "OlaniDesign";    // your repo name
-    const branch = "main";         // usually "main" or "master"
-    const folder = "images";       // folder where images are stored
+// ✅ Replace these with YOUR GitHub info:
+const username = "jeremyg91";
+const repo = "OlaniDesign";
+const branch = "main";
+const folder = "images";
 
-    async function loadImages() {
-        const url = `https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=${branch}`;
-        const res = await fetch(url);
-        const files = await res.json();
+async function loadImages() {
+  const url = `https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=${branch}`;
+  const res = await fetch(url);
+  const files = await res.json();
 
-        // Fetch captions JSON if exists
-        let captions = {};
-        try {
-            const capRes = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/${branch}/${folder}/gallery.json`);
-            if(capRes.ok) captions = await capRes.json();
-        } catch (e) { console.warn("No gallery.json found, using filenames as captions."); }
+  let captions = {};
+  try {
+    const capRes = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/${branch}/${folder}/gallery.json`);
+    if (capRes.ok) captions = await capRes.json();
+  } catch (e) { console.warn("No gallery.json found."); }
 
-        galleryList = files
-            .filter(file => file.type === "file" && /\.(jpe?g|png|gif)$/i.test(file.name))
-            .map(file => ({ src: file.download_url, name: file.name }));
+  galleryList = files
+    .filter(f => f.type === "file" && /\.(jpe?g|png|gif)$/i.test(f.name))
+    .map(f => ({
+      src: f.download_url,
+      name: f.name,
+      title: captions[f.name]?.title || f.name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' '),
+      description: captions[f.name]?.description || ''
+    }));
 
-        galleryList.forEach((item, index) => {
-            const captionText = captions[item.name] || item.name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ');
-            const div = document.createElement('div');
-            div.className = 'gallery-item';
-            div.innerHTML = `
-                <img src="${item.src}" alt="${captionText}" onclick="openModal(${index})">
-                <div class="caption">${captionText}</div>
-            `;
-            galleryGrid.appendChild(div);
-        });
-    }
+  galleryList.forEach((img, i) => {
+    const div = document.createElement('div');
+    div.className = 'gallery-item';
+    div.innerHTML = `
+      <img src="${img.src}" alt="${img.title}" onclick="openModal(${i})">
+      <div class="caption">${img.title}</div>
+    `;
+    galleryGrid.appendChild(div);
+  });
+}
 
-    function openModal(index) {
-        currentIndex = index;
-        modal.classList.add('active');
-        modalImg.src = galleryList[currentIndex].src;
-    }
-    function closeModal() { modal.classList.remove('active'); }
-    function changeImage(direction) {
-        currentIndex = (currentIndex + direction + galleryList.length) % galleryList.length;
-        modalImg.src = galleryList[currentIndex].src;
-    }
+function openModal(index) {
+  currentIndex = index;
+  const img = galleryList[currentIndex];
+  modal.classList.add('active');
+  modalImg.src = img.src;
+  modalTitle.textContent = img.title;
+  modalDesc.textContent = img.description;
+}
+function closeModal() { modal.classList.remove('active'); }
+function changeImage(dir) {
+  currentIndex = (currentIndex + dir + galleryList.length) % galleryList.length;
+  openModal(currentIndex);
+}
 
-    // ✅ SWIPE SUPPORT (Mobile)
-    let startX = 0;
-    modal.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    modal.addEventListener('touchend', e => {
-        let endX = e.changedTouches[0].clientX;
-        if (endX - startX > 50) changeImage(-1);      // swipe right
-        else if (startX - endX > 50) changeImage(1);  // swipe left
-    });
+// Swipe (mobile)
+let startX = 0;
+modal.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+modal.addEventListener('touchend', e => {
+  const endX = e.changedTouches[0].clientX;
+  if (endX - startX > 50) changeImage(-1);
+  else if (startX - endX > 50) changeImage(1);
+});
 
-    loadImages();
+// Keyboard arrows
+document.addEventListener('keydown', e => {
+  if (!modal.classList.contains('active')) return;
+  if (e.key === 'ArrowRight') changeImage(1);
+  else if (e.key === 'ArrowLeft') changeImage(-1);
+  else if (e.key === 'Escape') closeModal();
+});
+
+loadImages();
 </script>
 </body>
 </html>
