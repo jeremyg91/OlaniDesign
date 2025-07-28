@@ -24,13 +24,8 @@
       top: 0;
       z-index: 100;
     }
-    .logo-container {
-      width: 200px;
-    }
-    .logo {
-      width: 100%;
-      height: auto;
-    }
+    .logo-container { width: 200px; }
+    .logo { width: 100%; height: auto; }
     nav ul {
       list-style: none;
       display: flex;
@@ -49,19 +44,16 @@
       color: #2B5A8B;
       border-bottom-color: #2B5A8B;
     }
-
     .contact-hero {
       background: #2B5A8B;
       color: white;
       text-align: center;
       padding: 60px 20px;
     }
-
     .contact-hero h1 {
       font-size: 2.8rem;
       margin: 0;
     }
-
     .contact-content {
       display: flex;
       flex-wrap: wrap;
@@ -69,7 +61,6 @@
       gap: 40px;
       padding: 60px 5%;
     }
-
     .contact-form,
     .contact-info {
       flex: 1 1 400px;
@@ -78,151 +69,5 @@
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-
     .contact-form h2,
-    .contact-info h2 {
-      margin-bottom: 20px;
-      color: #2B5A8B;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 600;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .btn {
-      background: #2B5A8B;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .btn:hover {
-      background: #1E4161;
-    }
-
-    .contact-info p {
-      margin: 10px 0;
-    }
-
-    .contact-info h3 {
-      margin-top: 30px;
-    }
-
-    .social-links a {
-      display: inline-block;
-      margin-right: 15px;
-    }
-
-    .social-links img {
-      width: 30px;
-      height: 30px;
-    }
-
-    footer {
-      background: #2B5A8B;
-      color: white;
-      text-align: center;
-      padding: 30px;
-      margin-top: 60px;
-    }
-
-    footer p {
-      margin: 0;
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 768px) {
-      .contact-content {
-        flex-direction: column;
-        padding: 40px 5%;
-      }
-    }
-  </style>
-</head>
-<body>
-<header>
-  <div class="logo-container">
-    <a href="index.html">
-      <img src="FullLogo_Transparent.png" alt="Olani Designs Logo" class="logo" />
-    </a>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="gallery.html">Our Work</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main>
-  <section class="contact-hero">
-    <h1>Get in Touch</h1>
-  </section>
-
-  <section class="contact-content">
-    <div class="contact-form">
-      <h2>Send Us a Message</h2>
-      <form action="submit-form.php" method="POST">
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-        <div class="form-group">
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
-        <button type="submit" class="btn">Send Message</button>
-      </form>
-    </div>
-
-    <div class="contact-info">
-      <h2>Contact Information</h2>
-      <p><strong>Email:</strong> info@olanidesigns.com</p>
-      <p><strong>Phone:</strong> (123) 456-7890</p>
-      <p><strong>Business Hours:</strong> Monday–Friday, 9am–5pm</p>
-
-      <h3>Follow Us</h3>
-      <div class="social-links">
-        <a href="#"><img src="images/facebook-icon.png" alt="Facebook" /></a>
-        <a href="#"><img src="images/instagram-icon.png" alt="Instagram" /></a>
-        <a href="#"><img src="images/pinterest-icon.png" alt="Pinterest" /></a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <p>&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
-</footer>
-</body>
-</html>
+    .contact-info h
