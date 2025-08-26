@@ -1,252 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olani Designs - Professional Signage & Custom Decor Solutions</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', 'Arial', sans-serif;
-        }
-        body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-        }
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo-container {
-            width: 250px;
-        }
-        .logo {
-            width: 100%;
-            height: auto;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .logo:hover {
-            opacity: 0.8;
-            transform: scale(1.02);
-        }
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            padding: 8px 15px;
-            margin: 0 5px;
-            font-weight: 600;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        nav ul li a:hover,
-        nav ul li a.active {
-            color: #2B5A8B;
-            border-bottom-color: #2B5A8B;
-        }
-        .hero {
-            background-color: #ccc;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            z-index: -1;
-        }
-        .hero-background.active {
-            opacity: 1;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-        }
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        .hero p {
-            font-size: 1.4rem;
-            max-width: 700px;
-            margin-bottom: 40px;
-        }
-        .btn-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .btn {
-            display: inline-block;
-            background: #2B5A8B;
-            color: white;
-            padding: 15px 35px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s;
-            border: 2px solid #2B5A8B;
-            min-width: 200px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .btn:hover {
-            background: #1E4161;
-            transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(0,0,0,0.2);
-            border-color: #1E4161;
-        }
-        .btn-secondary {
-            background: transparent;
-            border-color: white;
-        }
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        .trust-badges {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        .trust-badges span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-        }
-        .trust-badges span:before {
-            content: "✓";
-            color: #E8B20F;
-            font-weight: bold;
-        }
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .logo-container {
-                width: 200px;
-                margin-bottom: 15px;
-            }
-            nav ul {
-                justify-content: center;
-                margin-top: 15px;
-            }
-            .hero {
-                height: 90vh;
-                padding: 0 15px;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .hero p {
-                font-size: 1.1rem;
-            }
-            .btn-container {
-                flex-direction: column;
-                gap: 15px;
-                width: 100%;
-            }
-            .btn {
-                width: 100%;
-                padding: 12px;
-            }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Custom Signs in Hawaiʻi | Olani Designs</title>
+  <meta name="description" content="Engraved and CNC signage and décor made on Hawaiʻi Island. Fast quotes. Local pickup and island-wide shipping." />
+  <link rel="canonical" href="https://olanidesign.com/" />
+
+  <!-- Social cards -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Olani Designs — Custom Signs in Hawaiʻi" />
+  <meta property="og:description" content="Professional signage for homes and businesses. Local craftsmanship. Free design consults." />
+  <meta property="og:url" content="https://olanidesign.com/" />
+  <meta property="og:image" content="https://olanidesign.com/assets/img/hero-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/images/alohagirl1.avif" imagesrcset="/images/alohagirl1.avif type(image/avif), /images/alohagirl1.webp type(image/webp), /images/alohagirl1.jpg type(image/jpeg)" />
+
+  <!-- Minimal critical CSS -->
+  <style>
+    :root { --brand:#2B5A8B; --brand-dark:#1E4161; --text:#333; --bg:#f9f9f9; }
+    * { box-sizing:border-box; }
+    html { font-family: Montserrat, Arial, sans-serif; }
+    body { margin:0; line-height:1.6; color:var(--text); background:var(--bg); }
+    a { color:inherit; }
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
+    .skip-link:focus{left:8px;top:8px;width:auto;height:auto;padding:.5rem 1rem;background:#fff;box-shadow:0 0 0 2px var(--brand);z-index:1000}
+    header { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.08); padding:12px 5%; position:sticky; top:0; z-index:10; display:flex; gap:24px; align-items:center; justify-content:space-between; }
+    .logo { width:220px; height:auto; }
+    nav ul{display:flex; list-style:none; gap:6px; margin:0; padding:0;}
+    nav a{display:inline-block; padding:8px 14px; text-decoration:none; font-weight:600; border-bottom:2px solid transparent;}
+    nav a[aria-current="page"]{color:var(--brand); border-bottom-color:var(--brand);}
+    .hero { position:relative; min-height:70svh; display:grid; place-items:center; text-align:center; color:#fff; overflow:hidden; }
+    .hero .slide{position:absolute; inset:0; opacity:0; transition:opacity 1s ease-in-out; background-position:center; background-size:cover; will-change:opacity;}
+    .hero .slide.is-active{opacity:1;}
+    .hero .content{position:relative; z-index:1; padding:0 1rem; text-shadow:2px 2px 5px rgba(0,0,0,.5);}
+    h1{font-size:clamp(1.8rem,4vw,3rem); margin:0 0 .75rem;}
+    .lead{font-size:clamp(1rem,2.2vw,1.25rem); max-width:52rem; margin:0 auto 1.75rem;}
+    .btn-row{display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
+    .btn{display:inline-block; background:var(--brand); color:#fff; padding:12px 26px; border-radius:999px; text-decoration:none; font-weight:700; border:2px solid var(--brand); min-width:200px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,.1); transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;}
+    .btn:hover{background:var(--brand-dark); border-color:var(--brand-dark); transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.15);}
+    .btn--ghost{background:#fff; color:#000; border-color:#fff;} /* higher contrast than transparent on photo */
+    .trust{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:14px;}
+    .trust span{display:inline-flex; align-items:center; gap:8px; font-weight:600; background:rgba(0,0,0,.35); padding:6px 10px; border-radius:999px}
+    .trust span::before{content:"✓"; color:#E8B20F; font-weight:700;}
+    main{display:block;}
+    footer{background:var(--brand); color:#fff; text-align:center; padding:28px 5%; margin-top:56px;}
+    @media (max-width:768px){ .logo{width:180px} header{flex-wrap:wrap} }
+    @media (prefers-reduced-motion: reduce){
+      .hero .slide{transition:none}
+    }
+  </style>
+
+  <!-- Local business schema (fill in phone and locality precisely) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "name":"Olani Designs",
+    "url":"https://olanidesign.com",
+    "image":"https://olanidesign.com/assets/img/hero-cover.jpg",
+    "telephone":"+1-808-960-1645",
+    "address":{"@type":"Hilo, Hawaii"},
+    "areaServed":"Servicing all of Hawaii",
+    "sameAs":["https://www.instagram.com/OlaniDesign/"]
+  }
+  </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+
 <header>
-    <div class="logo-container">
-        <a href="index.html">
-            <img src="FullLogo_Transparent.png" alt="Olani Designs Logo" class="logo">
-        </a>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="gallery.html">Our Work</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+  <a href="/" aria-label="Olani Designs home">
+    <img src="/FullLogo_Transparent.png" alt="Olani Designs" class="logo" width="220" height="60" />
+  </a>
+  <nav aria-label="Primary">
+    <ul>
+      <li><a href="/" aria-current="page">Home</a></li>
+      <li><a href="/gallery.html">Our Work</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </nav>
 </header>
-<main>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Custom Signage & Decor Solutions</h1>
-            <p>Professional-grade signs and home decor tailored to elevate your space and brand identity</p>
-            <div class="btn-container">
-                <a href="contact.html" class="btn">Get a Custom Quote</a>
-                <a href="gallery.html" class="btn btn-secondary">See Our Work</a>
-            </div>
-            <div class="trust-badges">
-                <span>10+ Years Experience</span>
-                <span>Locally Crafted</span>
-                <span>Free Design Consultations</span>
-            </div>
-        </div>
-    </section>
+
+<main id="main">
+  <section class="hero" aria-label="Showcase">
+    <!-- Slides are decorative; text alternatives are in content -->
+    <div class="slide is-active" style="background-image:
+         linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+         image-set(url('/images/alohagirl1.avif') type('image/avif'),
+                   url('/images/alohagirl1.webp') type('image/webp'),
+                   url('/images/alohagirl1.jpg') type('image/jpeg'));">
+    </div>
+    <div class="slide" style="background-image:
+         linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+         image-set(url('/images/alohagirl2.avif') type('image/avif'),
+                   url('/images/alohagirl2.webp') type('image/webp'),
+                   url('/images/alohagirl2.jpg') type('image/jpeg'));">
+    </div>
+    <div class="slide" style="background-image:
+         linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+         image-set(url('/images/Leigirl1.avif') type('image/avif'),
+                   url('/images/Leigirl1.webp') type('image/webp'),
+                   url('/images/Leigirl1.jpg') type('image/jpeg'));">
+    </div>
+
+    <div class="content">
+      <h1>Custom Signage & Décor made on Hawaii Island</h1>
+      <p class="lead">Unique hand crafted signs for homes and businesses. Local Business. Fast quotes. US wide shipping.</p>
+      <div class="btn-row">
+        <a class="btn" href="/contact.html">Get a Custom Quote</a>
+        <a class="btn btn--ghost" href="/gallery.html">See Our Work</a>
+      </div>
+      <div class="trust" aria-label="Trust markers">
+        <span>10+ years experience</span>
+        <span>Locally crafted</span>
+        <span>Design consultations and free quotes</span>
+      </div>
+    </div>
+  </section>
 </main>
-<footer style="background: #2B5A8B; color: white; text-align: center; padding: 30px; margin-top: 60px;">
-    <p style="margin-bottom: 15px; font-size: 1.1rem;">&copy; <script>document.write(new Date().getFullYear())</script> Olani Designs. All rights reserved.</p>
-    <p style="font-size: 0.9rem; opacity: 0.8;">Professional signage solutions for homes and businesses across Hawaii</p>
+
+<footer>
+  <p>&copy; <span id="y"></span> Olani Designs. All rights reserved.</p>
+  <p style="opacity:.85">Professional signage across Hawaiʻi • <a href="tel:+18080000000" style="color:#fff; text-decoration:underline;">(808) 000-0000</a> • <a href="mailto:hello@olanidesign.com" style="color:#fff; text-decoration:underline;">hello@olanidesign.com</a></p>
 </footer>
+
 <script>
-    const heroImages = [
-        './images/alohagirl1.jpg',
-        './images/alohagirl2.jpg',
-        './images/Leigirl1.jpg',
-        './images/honu1.jpg',
-        './images/kingofd.jpg'
-    ];
-    heroImages.forEach((imageUrl, index) => {
-        const bgDiv = document.createElement('div');
-        bgDiv.className = 'hero-background';
-        bgDiv.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${imageUrl}')`;
-        if (index === 0) bgDiv.classList.add('active');
-        document.querySelector('.hero').prepend(bgDiv);
-    });
-    let currentIndex = 0;
+  // year
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // simple slideshow with reduced-motion respect
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let i = 0;
+  const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!media.matches && slides.length > 1) {
     setInterval(() => {
-        const backgrounds = document.querySelectorAll('.hero-background');
-        backgrounds[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % backgrounds.length;
-        backgrounds[currentIndex].classList.add('active');
+      slides[i].classList.remove('is-active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('is-active');
     }, 5000);
+  }
+
+  // Preload next images to avoid flashes
+  slides.slice(1).forEach(s => {
+    const img = new Image();
+    const style = s.style.backgroundImage;
+    const match = /url\\(['"]?([^'")]+)['"]?\\)/.exec(style);
+    if (match) img.src = match[1];
+  });
 </script>
 </body>
 </html>
