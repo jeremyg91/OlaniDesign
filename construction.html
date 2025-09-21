@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Construction • Olani Designs</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* minimal safety styles in case your CSS name differs */
+    .hero {padding: 5rem 1rem; text-align:center;}
+    .grid {display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; padding:1rem;}
+    .card {border:1px solid #ddd; background:#fff; border-radius:8px; overflow:hidden}
+    .card img{width:100%; height:220px; object-fit:cover; display:block}
+    .cap {padding:.6rem .8rem; font-size:.95rem}
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <section class="hero">
+    <h1>Construction</h1>
+    <p>Concrete, framing, kitchens & more—recent projects from the field.</p>
+  </section>
+
+  <section class="grid" id="gallery"></section>
+
+  <script>
+    // Reuse your header include if your pages load header.html via JS
+    fetch('header.html').then(r=>r.text()).then(h=>{document.getElementById('site-header').innerHTML=h;});
+
+    // Simple GitHub-Contents loader: lists images in /images/construction
+    const owner = 'jeremyg91';
+    const repo  = 'OlaniDesign';
+    const path  = 'images/construction';
+
+    async function loadImages() {
+      const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`);
+      if(!res.ok) { document.getElementById('gallery').innerHTML = '<p style="padding:1rem">Add images to /images/construction/</p>'; return; }
+      const files = (await res.json()).filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name));
+      // Optional captions from images/construction.json ( { "filename.jpg": "Caption" } )
+      let caps = {};
+      try {
+        const c = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/main/images/construction.json`);
+        if (c.ok) caps = await c.json();
+      } catch(_) {}
+      const wrap = document.getElementById('gallery');
+      wrap.innerHTML = files.map(f => `
+        <article class="card">
+          <img loading="lazy" src="${f.download_url}" alt="${f.name.replace(/[-_]/g,' ')}">
+          <div class="cap">${caps[f.name] || f.name.replace(/[-_]/g,' ').replace(/\.(jpg|jpeg|png|webp|gif)$/i,'')}</div>
+        </article>
+      `).join('');
+    }
+    loadImages();
+  </script>
+</body>
+</html>
