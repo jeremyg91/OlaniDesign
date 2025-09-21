@@ -1,7 +1,7 @@
 <header>
-  <div class="logo-container">
+  <div class="logo">
     <a href="index.html">
-      <img src="FullLogo_Transparent.png" alt="Olani Designs Logo" class="logo">
+      <img src="FullLogo_Transparent.png" alt="Olani Designs Logo">
     </a>
   </div>
   <nav>
@@ -14,3 +14,15 @@
     </ul>
   </nav>
 </header>
+
+<script>
+  // Highlight current page link in nav
+  (function () {
+    var here = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('nav a').forEach(function(a){
+      if (a.getAttribute('href') === here) {
+        a.classList.add('active');
+      }
+    });
+  })();
+</script>
