@@ -106,6 +106,8 @@ textarea {
     min-height: 120px;
     resize: vertical;
 }
+
+/* Base button (kept for contact page etc.) */
 .btn {
     background: #2B5A8B;
     color: white;
@@ -120,19 +122,21 @@ textarea {
     background: #1E4161;
 }
 
-.contact-info p {
-    margin: 10px 0;
+/* === NEW: Button variants for homepage hero === */
+/* Signage = brand blue (same as .btn so it stays consistent across site) */
+.btn--signage {
+    background: #2B5A8B;
 }
-.contact-info h3 {
-    margin-top: 30px;
+.btn--signage:hover {
+    background: #1E4161;
 }
-.social-links a {
-    display: inline-block;
-    margin-right: 15px;
+
+/* Construction = light blue variant */
+.btn--construction {
+    background: #4A90E2;   /* lighter blue */
 }
-.social-links img {
-    width: 30px;
-    height: 30px;
+.btn--construction:hover {
+    background: #357ABD;   /* slightly darker on hover */
 }
 
 /* Footer */
