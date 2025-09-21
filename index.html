@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Custom Signs in Hawaiʻi | Olani Designs</title>
-  <meta name="description" content="Engraved and CNC signage and décor made on Hawaiʻi Island. Fast quotes. Local pickup and island-wide shipping." />
+  <title>Construction & Custom Signage in Hawaii | Olani Designs</title>
+  <meta name="description" content="Construction services and custom signage made on Hawaiʻi Island. Fast quotes. Local pickup and island-wide shipping." />
   <link rel="canonical" href="https://olanidesign.com/" />
 
   <!-- Social cards -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Olani Designs — Custom Signs in Hawaiʻi" />
-  <meta property="og:description" content="Professional signage for homes and businesses. Local craftsmanship. Free design consults." />
+  <meta property="og:title" content="Olani Designs — Construction & Custom Signage in Hawaii" />
+  <meta property="og:description" content="Professional construction and signage for homes and businesses. Local craftsmanship. Free design consults." />
   <meta property="og:url" content="https://olanidesign.com/" />
   <meta property="og:image" content="https://olanidesign.com/assets/img/hero-cover.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -42,9 +42,14 @@
     h1{font-size:clamp(1.8rem,4vw,3rem); margin:0 0 .75rem;}
     .lead{font-size:clamp(1rem,2.2vw,1.25rem); max-width:52rem; margin:0 auto 1.75rem;}
     .btn-row{display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
-    .btn{display:inline-block; background:var(--brand); color:#fff; padding:12px 26px; border-radius:999px; text-decoration:none; font-weight:700; border:2px solid var(--brand); min-width:200px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,.1); transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;}
-    .btn:hover{background:var(--brand-dark); border-color:var(--brand-dark); transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.15);}
-    .btn--ghost{background:#fff; color:#000; border-color:#fff;} /* higher contrast than transparent on photo */
+    .btn{display:inline-block; color:#fff; padding:12px 26px; border-radius:999px; text-decoration:none; font-weight:700; min-width:200px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,.1); transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;}
+    .btn:hover{transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.15);}
+    /* Signage = brand blue */
+    .btn--signage{background:#2B5A8B; border:2px solid #2B5A8B;}
+    .btn--signage:hover{background:#1E4161; border-color:#1E4161;}
+    /* Construction = light blue */
+    .btn--construction{background:#4A90E2; border:2px solid #4A90E2;}
+    .btn--construction:hover{background:#357ABD; border-color:#357ABD;}
     .trust{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:14px;}
     .trust span{display:inline-flex; align-items:center; gap:8px; font-weight:600; background:rgba(0,0,0,.35); padding:6px 10px; border-radius:999px}
     .trust span::before{content:"✓"; color:#E8B20F; font-weight:700;}
@@ -56,7 +61,7 @@
     }
   </style>
 
-  <!-- Local business schema (fill in phone and locality precisely) -->
+  <!-- Local business schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -81,7 +86,8 @@
   <nav aria-label="Primary">
     <ul>
       <li><a href="/" aria-current="page">Home</a></li>
-      <li><a href="/gallery.html">Our Work</a></li>
+      <li><a href="/construction.html">Construction</a></li>
+      <li><a href="/signage.html">Signage</a></li>
       <li><a href="/about.html">About</a></li>
       <li><a href="/contact.html">Contact</a></li>
     </ul>
@@ -90,7 +96,7 @@
 
 <main id="main">
   <section class="hero" aria-label="Showcase">
-    <!-- Slides are decorative; text alternatives are in content -->
+    <!-- Slides -->
     <div class="slide is-active" style="background-image:
          linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
          image-set(url('/images/alohagirl1.avif') type('image/avif'),
@@ -111,11 +117,11 @@
     </div>
 
     <div class="content">
-      <h1>Custom Signage & Décor made on Hawaii Island</h1>
-      <p class="lead">Unique hand crafted signs for homes and businesses. Local Business. Fast quotes. US wide shipping.</p>
+      <h1>Construction and Custom Signage Professionals in Hawaii</h1>
+      <p class="lead">Reliable construction services and unique custom signs — built locally on the Big Island with care and craftsmanship.</p>
       <div class="btn-row">
-        <a class="btn" href="/contact.html">Get a Custom Quote</a>
-        <a class="btn btn--ghost" href="/gallery.html">See Our Work</a>
+        <a class="btn btn--construction" href="/construction.html">View Construction</a>
+        <a class="btn btn--signage" href="/signage.html">View Signage</a>
       </div>
       <div class="trust" aria-label="Trust markers">
         <span>10+ years experience</span>
@@ -128,14 +134,14 @@
 
 <footer>
   <p>&copy; <span id="y"></span> Olani Designs. All rights reserved.</p>
-  <p style="opacity:.85">Professional signage across Hawaiʻi • <a href="tel:+18080000000" style="color:#fff; text-decoration:underline;">(808) 000-0000</a> • <a href="mailto:hello@olanidesign.com" style="color:#fff; text-decoration:underline;">hello@olanidesign.com</a></p>
+  <p style="opacity:.85">Professional construction & signage across Hawaiʻi • <a href="tel:+18080000000" style="color:#fff; text-decoration:underline;">(808) 000-0000</a> • <a href="mailto:hello@olanidesign.com" style="color:#fff; text-decoration:underline;">hello@olanidesign.com</a></p>
 </footer>
 
 <script>
   // year
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  // simple slideshow with reduced-motion respect
+  // slideshow
   const slides = Array.from(document.querySelectorAll('.slide'));
   let i = 0;
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -147,11 +153,11 @@
     }, 5000);
   }
 
-  // Preload next images to avoid flashes
+  // Preload next images
   slides.slice(1).forEach(s => {
     const img = new Image();
     const style = s.style.backgroundImage;
-    const match = /url\\(['"]?([^'")]+)['"]?\\)/.exec(style);
+    const match = /url\(['"]?([^'")]+)['"]?\)/.exec(style);
     if (match) img.src = match[1];
   });
 </script>
