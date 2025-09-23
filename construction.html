@@ -3,55 +3,98 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Construction • Olani Designs</title>
+  <title>Construction | Olani Designs Hawaii</title>
+  <meta name="description" content="Recent construction projects on Hawaii Island: concrete, framing, kitchens, renovations, and more by Olani Designs." />
+  <link rel="canonical" href="https://olanidesign.com/construction.html" />
   <link rel="stylesheet" href="css/style.css" />
+
   <style>
-    /* minimal safety styles in case your CSS name differs */
-    .hero {padding: 5rem 1rem; text-align:center;}
-    .grid {display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; padding:1rem;}
-    .card {border:1px solid #ddd; background:#fff; border-radius:8px; overflow:hidden}
-    .card img{width:100%; height:220px; object-fit:cover; display:block}
-    .cap {padding:.6rem .8rem; font-size:.95rem}
+    /* Minimal page-specific styles */
+    .hero { padding: 5rem 1rem; text-align:center; }
+    .hero h1 { margin-bottom:.5rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; padding:1rem 5%; }
+    .card { border:1px solid #ddd; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,.05); }
+    .card img { width:100%; height:240px; object-fit:cover; display:block; }
+    .cap { padding:.7rem .9rem; font-size:.95rem }
   </style>
 </head>
 <body>
-  <div id="site-header"></div>
+<a class="skip-link" href="#main">Skip to content</a>
 
+<!-- Shared header include -->
+<div id="site-header"></div>
+
+<main id="main">
   <section class="hero">
     <h1>Construction</h1>
-    <p>Concrete, framing, kitchens & more—recent projects from the field.</p>
+    <p>Concrete, framing, kitchens &amp; more — recent projects from the field.</p>
   </section>
 
-  <section class="grid" id="gallery"></section>
+  <section class="grid" id="gallery" aria-label="Construction gallery"></section>
+</main>
 
-  <script>
-    // Reuse your header include if your pages load header.html via JS
-    fetch('header.html').then(r=>r.text()).then(h=>{document.getElementById('site-header').innerHTML=h;});
+<!-- Shared footer include -->
+<div id="site-footer"></div>
 
-    // Simple GitHub-Contents loader: lists images in /images/construction
-    const owner = 'jeremyg91';
-    const repo  = 'OlaniDesign';
-    const path  = 'images/construction';
+<script>
+  // === Load shared header & mark 'Construction' active ===
+  fetch('header.html')
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById('site-header').innerHTML = html;
+      const link = document.querySelector('nav a[href="construction.html"]');
+      if (link) link.classList.add('active');
+    });
 
-    async function loadImages() {
+  // === Load shared footer and set year ===
+  fetch('footer.html')
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById('site-footer').innerHTML = html;
+      const y = document.getElementById('y');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+
+  // === Build gallery from /images/construction ===
+  const owner = 'jeremyg91';
+  const repo  = 'OlaniDesign';
+  const path  = 'images/construction';
+
+  async function loadImages() {
+    try {
       const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`);
-      if(!res.ok) { document.getElementById('gallery').innerHTML = '<p style="padding:1rem">Add images to /images/construction/</p>'; return; }
-      const files = (await res.json()).filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name));
-      // Optional captions from images/construction.json ( { "filename.jpg": "Caption" } )
+      if (!res.ok) {
+        document.getElementById('gallery').innerHTML =
+          '<p style="padding:1rem 5%">Add images to <code>/images/construction/</code> to populate this gallery.</p>';
+        return;
+      }
+      const files = (await res.json()).filter(f => /\.(jpe?g|png|webp|gif|avif)$/i.test(f.name));
+
+      // Optional captions from images/construction.json  -> { "filename.jpg": "Nice caption" }
       let caps = {};
       try {
         const c = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/main/images/construction.json`);
         if (c.ok) caps = await c.json();
       } catch(_) {}
-      const wrap = document.getElementById('gallery');
-      wrap.innerHTML = files.map(f => `
+
+      const toTitle = s => s
+        .replace(/[-_]/g, ' ')
+        .replace(/\.(jpe?g|png|webp|gif|avif)$/i, '');
+
+      const html = files.map(f => `
         <article class="card">
-          <img loading="lazy" src="${f.download_url}" alt="${f.name.replace(/[-_]/g,' ')}">
-          <div class="cap">${caps[f.name] || f.name.replace(/[-_]/g,' ').replace(/\.(jpg|jpeg|png|webp|gif)$/i,'')}</div>
+          <img loading="lazy" decoding="async" src="${f.download_url}" alt="${toTitle(f.name)}">
+          <div class="cap">${caps[f.name] || toTitle(f.name)}</div>
         </article>
       `).join('');
+
+      document.getElementById('gallery').innerHTML = html || '<p style="padding:1rem 5%">No images found yet.</p>';
+    } catch (e) {
+      document.getElementById('gallery').innerHTML =
+        '<p style="padding:1rem 5%">Could not load images. Please try again later.</p>';
     }
-    loadImages();
-  </script>
+  }
+  loadImages();
+</script>
 </body>
 </html>
