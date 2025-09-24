@@ -1,156 +1,164 @@
 /* Basic Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
 }
 
-/* Header */
+/* Header (consistent across all pages) */
 header {
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 1rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 0.5rem 5%;              /* slightly tighter */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.logo img {
-    height: 60px;
-    transition: transform 0.3s ease;
+/* Logo size: universal selector for both patterns */
+.logo img,
+.site-logo {
+  height: 56px;                    /* adjust 48–64px as you like */
+  width: auto;
+  display: block;
+  max-width: 100%;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transition: transform 0.2s ease;
 }
 
-.logo img:hover {
-    transform: scale(1.05);
+.logo img:hover,
+.site-logo:hover {
+  transform: scale(1.02);
 }
 
+/* Nav */
 nav ul {
-    display: flex;
-    list-style: none;
+  display: flex;
+  list-style: none;
+  gap: 0.25rem;
 }
 
 nav ul li a {
-    text-decoration: none;
-    color: #333;
-    padding: 0.5rem 1rem;
-    margin: 0 0.25rem;
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
+  text-decoration: none;
+  color: #333;
+  padding: 0.5rem 0.9rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-bottom-color 0.2s ease;
 }
 
 nav ul li a.active,
 nav ul li a:hover {
-    color: #8B5A2B;
-    border-bottom-color: #8B5A2B;
+  color: #8B5A2B;
+  border-bottom-color: #8B5A2B;
 }
 
 /* Contact Page Styles */
 .contact-hero {
-    background: #2B5A8B;
-    color: white;
-    text-align: center;
-    padding: 60px 20px;
+  background: #2B5A8B;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
 }
 .contact-hero h1 {
-    font-size: 2.8rem;
-    margin: 0;
+  font-size: 2.8rem;
+  margin: 0;
 }
 
 .contact-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 40px;
-    padding: 60px 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 60px 5%;
 }
 
 .contact-form,
 .contact-info {
-    flex: 1 1 400px;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  flex: 1 1 400px;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .contact-form h2,
 .contact-info h2 {
-    margin-bottom: 20px;
-    color: #2B5A8B;
+  margin-bottom: 20px;
+  color: #2B5A8B;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
+.form-group { margin-bottom: 20px; }
 label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
 }
 input,
 textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
 }
 textarea {
-    min-height: 120px;
-    resize: vertical;
+  min-height: 120px;
+  resize: vertical;
 }
 
-/* Base button (kept for contact page etc.) */
+/* Buttons */
 .btn {
-    background: #2B5A8B;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 50px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s;
+  background: #2B5A8B;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
-.btn:hover {
-    background: #1E4161;
-}
+.btn:hover { background: #1E4161; }
 
-/* === NEW: Button variants for homepage hero === */
-/* Signage = brand blue (same as .btn so it stays consistent across site) */
-.btn--signage {
-    background: #2B5A8B;
-}
-.btn--signage:hover {
-    background: #1E4161;
-}
+/* Variants */
+.btn--signage { background: #2B5A8B; }
+.btn--signage:hover { background: #1E4161; }
 
-/* Construction = light blue variant */
-.btn--construction {
-    background: #4A90E2;   /* lighter blue */
-}
-.btn--construction:hover {
-    background: #357ABD;   /* slightly darker on hover */
-}
+.btn--construction { background: #4A90E2; }
+.btn--construction:hover { background: #357ABD; }
 
 /* Footer */
 footer {
-    background: #2B5A8B;
-    color: white;
-    text-align: center;
-    padding: 30px;
+  background: #2B5A8B;
+  color: white;
+  text-align: center;
+  padding: 30px;
 }
 
-/* Responsive */
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  header { padding: 0.5rem 4%; }
+  .logo img,
+  .site-logo { height: 52px; }
+}
+
 @media (max-width: 768px) {
-    .contact-content {
-        flex-direction: column;
-        padding: 40px 5%;
-    }
+  .contact-content {
+    flex-direction: column;
+    padding: 40px 5%;
+  }
+  nav ul { gap: 0.1rem; }
+}
+
+@media (max-width: 480px) {
+  .logo img,
+  .site-logo { height: 48px; }     /* smaller logo on small phones */
+  nav ul li a { padding: 0.45rem 0.7rem; }
 }
