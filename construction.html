@@ -21,7 +21,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Shared header include -->
+<!-- Shared header -->
 <div id="site-header"></div>
 
 <main id="main">
@@ -33,27 +33,23 @@
   <section class="grid" id="gallery" aria-label="Construction gallery"></section>
 </main>
 
-<!-- Shared footer include -->
+<!-- Shared footer -->
 <div id="site-footer"></div>
 
-<script>
-  // === Load shared header & mark 'Construction' active ===
-  fetch('header.html')
-    .then(r => r.text())
-    .then(html => {
-      document.getElementById('site-header').innerHTML = html;
-      const link = document.querySelector('nav a[href="construction.html"]');
-      if (link) link.classList.add('active');
-    });
+<!-- Load shared header/footer -->
+<script src="main.js"></script>
 
-  // === Load shared footer and set year ===
-  fetch('footer.html')
-    .then(r => r.text())
-    .then(html => {
-      document.getElementById('site-footer').innerHTML = html;
-      const y = document.getElementById('y');
-      if (y) y.textContent = new Date().getFullYear();
-    });
+<script>
+  // Mark Construction active once header is injected
+  (function markConstructionActive(){
+    const link = document.querySelector('nav a[href="construction.html"]');
+    if (link) {
+      link.classList.add('active');
+      link.setAttribute('aria-current','page');
+    } else {
+      setTimeout(markConstructionActive, 60);
+    }
+  })();
 
   // === Build gallery from /images/construction ===
   const owner = 'jeremyg91';
@@ -70,7 +66,7 @@
       }
       const files = (await res.json()).filter(f => /\.(jpe?g|png|webp|gif|avif)$/i.test(f.name));
 
-      // Optional captions from images/construction.json  -> { "filename.jpg": "Nice caption" }
+      // Optional captions from images/construction.json
       let caps = {};
       try {
         const c = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/main/images/construction.json`);
