@@ -36,25 +36,10 @@
 <!-- Shared footer include -->
 <div id="site-footer"></div>
 
+<!-- Load shared header/footer & gallery logic -->
+<script src="main.js"></script>
+
 <script>
-  // === Load shared header & mark 'Signage' active ===
-  fetch('header.html')
-    .then(r => r.text())
-    .then(html => {
-      document.getElementById('site-header').innerHTML = html;
-      const link = document.querySelector('nav a[href="signage.html"]');
-      if (link) link.classList.add('active');
-    });
-
-  // === Load shared footer and set year ===
-  fetch('footer.html')
-    .then(r => r.text())
-    .then(html => {
-      document.getElementById('site-footer').innerHTML = html;
-      const y = document.getElementById('y');
-      if (y) y.textContent = new Date().getFullYear();
-    });
-
   // === Build gallery from /images/signage ===
   const owner = 'jeremyg91';
   const repo  = 'OlaniDesign';
