@@ -8,6 +8,9 @@
 </footer>
 
 <script>
-  // Update year
-  document.getElementById('y').textContent = new Date().getFullYear();
+  // Auto-update year
+  const ySpan = document.getElementById('y');
+  if (ySpan) {
+    ySpan.textContent = new Date().getFullYear();
+  }
 </script>
