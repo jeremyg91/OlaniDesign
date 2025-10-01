@@ -64,8 +64,15 @@
     "url":"https://olanidesign.com",
     "image":"https://olanidesign.com/assets/img/hero-cover.jpg",
     "telephone":"+1-808-960-1645",
-    "address":{"@type":"Hilo, Hawaii"},
-    "areaServed":"Servicing all of Hawaii",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"12th Ave",
+      "addressLocality":"Keaau",
+      "addressRegion":"HI",
+      "postalCode":"96749",
+      "addressCountry":"US"
+    },
+    "areaServed":"Hawaii Island",
     "sameAs":["https://www.instagram.com/OlaniDesign/"]
   }
   </script>
@@ -118,23 +125,28 @@
 <div id="site-footer"></div>
 
 <script>
-  // Year in footer
-  const y = new Date().getFullYear();
-
-  // Load shared header & footer
+  // Load shared header & mark Home active
   fetch('header.html')
     .then(r => r.text())
-    .then(h => { document.getElementById('site-header').innerHTML = h; });
+    .then(h => {
+      document.getElementById('site-header').innerHTML = h;
+      const home = document.querySelector('nav a[href="index.html"], nav a[href="/"]');
+      if (home) {
+        home.classList.add('active');
+        home.setAttribute('aria-current', 'page');
+      }
+    });
 
+  // Load shared footer and set year
   fetch('footer.html')
     .then(r => r.text())
     .then(f => {
       document.getElementById('site-footer').innerHTML = f;
       const span = document.getElementById('y');
-      if (span) span.textContent = y;
+      if (span) span.textContent = new Date().getFullYear();
     });
 
-  // slideshow
+  // Slideshow (respects reduced motion)
   const slides = Array.from(document.querySelectorAll('.slide'));
   let i = 0;
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -148,10 +160,11 @@
 
   // Preload next images
   slides.slice(1).forEach(s => {
-    const img = new Image();
-    const style = s.style.backgroundImage;
-    const match = /url\(['"]?([^'")]+)['"]?\)/.exec(style);
-    if (match) img.src = match[1];
+    const m = /url\(['"]?([^'")]+)['"]?\)/.exec(s.style.backgroundImage);
+    if (m) {
+      const img = new Image();
+      img.src = m[1];
+    }
   });
 </script>
 </body>
