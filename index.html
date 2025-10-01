@@ -14,7 +14,6 @@
   <meta property="og:description" content="Professional construction and signage for homes and businesses. Local craftsmanship. Free design consults." />
   <meta property="og:url" content="https://olanidesign.com/" />
   <meta property="og:image" content="https://olanidesign.com/assets/img/hero-cover.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Performance -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -125,27 +124,21 @@
 <!-- Shared footer -->
 <div id="site-footer"></div>
 
-<script>
-  // Load shared header & mark Home active
-  fetch('header.html')
-    .then(r => r.text())
-    .then(h => {
-      document.getElementById('site-header').innerHTML = h;
-      const home = document.querySelector('nav a[href="index.html"], nav a[href="/"]');
-      if (home) {
-        home.classList.add('active');
-        home.setAttribute('aria-current', 'page');
-      }
-    });
+<!-- Shared header/footer loader + scroll shrink -->
+<script src="main.js"></script>
 
-  // Load shared footer and set year
-  fetch('footer.html')
-    .then(r => r.text())
-    .then(f => {
-      document.getElementById('site-footer').innerHTML = f;
-      const span = document.getElementById('y');
-      if (span) span.textContent = new Date().getFullYear();
-    });
+<!-- Mark Home active after header is injected -->
+<script>
+  (function markHomeActive(){
+    const link = document.querySelector('nav a[href="index.html"], nav a[href="/"]');
+    if (link) {
+      link.classList.add('active');
+      link.setAttribute('aria-current','page');
+    } else {
+      // header may not be injected yet—check again shortly
+      setTimeout(markHomeActive, 60);
+    }
+  })();
 
   // Slideshow (respects reduced motion)
   const slides = Array.from(document.querySelectorAll('.slide'));
