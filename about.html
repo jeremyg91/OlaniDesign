@@ -13,7 +13,6 @@
   <meta property="og:description" content="Construction and handcrafted signage from Hawaii Island." />
   <meta property="og:url" content="https://olanidesign.com/about.html" />
   <meta property="og:image" content="https://olanidesign.com/assets/img/hero-cover.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Fonts & CSS -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -98,24 +97,20 @@
 <!-- Shared footer include -->
 <div id="site-footer"></div>
 
-<script>
-  // Load header and mark About active
-  fetch('header.html')
-    .then(r => r.text())
-    .then(html => {
-      document.getElementById('site-header').innerHTML = html;
-      const link = document.querySelector('nav a[href="about.html"]');
-      if (link) link.classList.add('active');
-    });
+<!-- Load shared header/footer + scroll-shrink -->
+<script src="main.js"></script>
 
-  // Load footer and update year
-  fetch('footer.html')
-    .then(r => r.text())
-    .then(html => {
-      document.getElementById('site-footer').innerHTML = html;
-      const y = document.getElementById('y');
-      if (y) y.textContent = new Date().getFullYear();
-    });
+<!-- Mark About active once header is injected -->
+<script>
+  (function markAboutActive(){
+    const link = document.querySelector('nav a[href="about.html"]');
+    if (link) {
+      link.classList.add('active');
+      link.setAttribute('aria-current','page');
+    } else {
+      setTimeout(markAboutActive, 60);
+    }
+  })();
 </script>
 </body>
 </html>
