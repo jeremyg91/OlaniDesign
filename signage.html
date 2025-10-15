@@ -16,6 +16,77 @@
     .card { border:1px solid #ddd; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,.05); }
     .card img { width:100%; height:240px; object-fit:cover; display:block; }
     .cap { padding:.7rem .9rem; font-size:.95rem }
+
+    /* === Lightbox (signage) === */
+    .lb-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.6);
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s ease;
+      z-index: 9998;
+    }
+    .lb-wrap {
+      position: fixed; inset: 0;
+      display: grid; place-items: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s ease;
+      z-index: 9999;
+    }
+    .lb {
+      width: min(1100px, 95vw);
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,.25);
+      display: grid;
+      grid-template-columns: 1fr 320px; /* image | sidebar */
+      gap: 0;
+      max-height: 90vh;
+      position: relative;
+    }
+    .lb-img {
+      display: block;
+      width: 100%;
+      height: 90vh;
+      max-height: 90vh;
+      object-fit: contain;
+      background: #000;
+    }
+    .lb-aside {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .lb-aside h3 { margin: 0; color: var(--brand,#2B5A8B); }
+    .lb-cap { color: #444; font-size: .95rem; }
+    .lb-btn {
+      margin-top: auto;
+      display: inline-block;
+      text-align: center;
+      background: var(--brand,#2B5A8B);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid var(--brand,#2B5A8B);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .lb-btn:hover { background: var(--brand-dark,#1E4161); border-color: var(--brand-dark,#1E4161); transform: translateY(-1px); }
+    .lb-close {
+      position: absolute; top: 8px; right: 10px;
+      font-size: 28px; line-height: 1; border: 0; background: transparent; cursor: pointer;
+      color: #333;
+    }
+    .lb-open .lb-backdrop,
+    .lb-open .lb-wrap { opacity: 1; pointer-events: auto; }
+
+    /* Mobile: stack image above sidebar */
+    @media (max-width: 700px){
+      .lb { grid-template-columns: 1fr; }
+      .lb-img { height: 60vh; max-height: 60vh; }
+    }
   </style>
 </head>
 <body>
@@ -36,14 +107,43 @@
 <!-- Shared footer include -->
 <div id="site-footer"></div>
 
-<!-- Load shared header/footer & gallery logic -->
+<!-- Lightbox -->
+<div class="lb-backdrop" id="lb-backdrop" hidden></div>
+<div class="lb-wrap" id="lb-wrap" role="dialog" aria-modal="true" aria-labelledby="lb-title" hidden>
+  <div class="lb">
+    <button class="lb-close" id="lb-close" aria-label="Close">×</button>
+    <img class="lb-img" id="lb-img" alt="">
+    <aside class="lb-aside">
+      <h3 id="lb-title">Like something similar?</h3>
+      <div class="lb-cap" id="lb-cap"></div>
+      <a class="lb-btn" id="lb-cta" href="contact.html">Enquire this product</a>
+    </aside>
+  </div>
+</div>
+
+<!-- Load shared header/footer & helpers -->
 <script src="main.js"></script>
 
 <script>
+  // === Mark 'Signage' active in header once injected by main.js ===
+  document.addEventListener('DOMContentLoaded', () => {
+    const markActive = () => {
+      const link = document.querySelector('nav a[href="signage.html"]');
+      if (link) link.classList.add('active');
+    };
+    if (document.querySelector('nav')) markActive();
+    else document.addEventListener('olani:header-ready', markActive);
+  });
+
   // === Build gallery from /images/signage ===
   const owner = 'jeremyg91';
   const repo  = 'OlaniDesign';
   const path  = 'images/signage';
+
+  const toTitle = s => s
+    .replace(/[-_]/g, ' ')
+    .replace(/\.(jpe?g|png|webp|gif|avif)$/i, '')
+    .trim();
 
   async function loadImages() {
     try {
@@ -62,23 +162,68 @@
         if (c.ok) caps = await c.json();
       } catch(_) {}
 
-      const toTitle = s => s
-        .replace(/[-_]/g, ' ')
-        .replace(/\.(jpe?g|png|webp|gif|avif)$/i, '');
-
-      const html = files.map(f => `
-        <article class="card">
-          <img loading="lazy" decoding="async" src="${f.download_url}" alt="${toTitle(f.name)}">
-          <div class="cap">${caps[f.name] || toTitle(f.name)}</div>
-        </article>
-      `).join('');
+      const html = files.map(f => {
+        const title = caps[f.name] || toTitle(f.name);
+        return `
+          <article class="card">
+            <a href="${f.download_url}" data-name="${encodeURIComponent(title)}" data-src="${f.download_url}" class="signage-item">
+              <img loading="lazy" decoding="async" src="${f.download_url}" alt="${title}">
+              <div class="cap">${title}</div>
+            </a>
+          </article>
+        `;
+      }).join('');
 
       document.getElementById('gallery').innerHTML = html || '<p style="padding:1rem 5%">No images found yet.</p>';
+
+      // Bind click -> open lightbox
+      document.querySelectorAll('.signage-item').forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          openLightbox(a.getAttribute('data-src'), decodeURIComponent(a.getAttribute('data-name') || ''));
+        });
+      });
     } catch (e) {
       document.getElementById('gallery').innerHTML =
         '<p style="padding:1rem 5%">Could not load images. Please try again later.</p>';
     }
   }
+
+  // === Lightbox logic ===
+  const lbBackdrop = document.getElementById('lb-backdrop');
+  const lbWrap = document.getElementById('lb-wrap');
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-cap');
+  const lbCTA = document.getElementById('lb-cta');
+  const lbClose = document.getElementById('lb-close');
+
+  function openLightbox(src, name) {
+    lbImg.src = src;
+    lbImg.alt = name || 'Signage preview';
+    lbCap.textContent = name || '';
+
+    // Build contact link with prefilled subject & message
+    const subject = `Signage enquiry: ${name || 'Product'}`;
+    const message = `Hi, I'm interested in something similar to "${name}". Please contact me with options and pricing.`;
+    const params = new URLSearchParams({ subject, message });
+    lbCTA.href = `contact.html?${params.toString()}`;
+
+    document.documentElement.classList.add('lb-open');
+    lbBackdrop.hidden = false;
+    lbWrap.hidden = false;
+  }
+
+  function closeLightbox() {
+    document.documentElement.classList.remove('lb-open');
+    lbBackdrop.hidden = true;
+    lbWrap.hidden = true;
+    lbImg.src = '';
+  }
+
+  lbBackdrop.addEventListener('click', closeLightbox);
+  lbClose.addEventListener('click', closeLightbox);
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
   loadImages();
 </script>
 </body>
