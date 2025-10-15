@@ -58,6 +58,11 @@
     <div class="contact-form">
       <h2>Send a Message</h2>
 
+      <!-- Prefill notice (hidden until we have query params) -->
+      <div id="prefill-note" class="hint" style="display:none; margin-bottom:8px;">
+        We pre-filled your message from the product you selected.
+      </div>
+
       <!-- Replace action with your Formspree endpoint -->
       <form id="contact-form" action="https://formspree.io/f/your-id" method="POST" novalidate>
         <!-- spam honeypot -->
@@ -123,8 +128,8 @@
 <!-- Load shared header/footer + scroll-shrink -->
 <script src="main.js"></script>
 
-<!-- Mark Contact active once header is injected -->
 <script>
+  // Mark Contact active once header is injected (main.js inserts header)
   (function markContactActive(){
     const link = document.querySelector('nav a[href="contact.html"]');
     if (link) {
@@ -132,6 +137,30 @@
       link.setAttribute('aria-current','page');
     } else {
       setTimeout(markContactActive, 60);
+    }
+  })();
+
+  // Prefill subject/message from query string (e.g., ?subject=...&message=...)
+  (function prefillFromQuery(){
+    const params = new URLSearchParams(location.search);
+    const subject = params.get('subject');
+    const message = params.get('message');
+
+    let didPrefill = false;
+    if (subject) {
+      const s = document.getElementById('subject');
+      if (s) { s.value = subject; didPrefill = true; }
+    }
+    if (message) {
+      const m = document.getElementById('message');
+      if (m) { m.value = message; didPrefill = true; }
+    }
+    if (didPrefill) {
+      const note = document.getElementById('prefill-note');
+      if (note) note.style.display = 'block';
+      // Focus the name field to guide user to start
+      const name = document.getElementById('name');
+      if (name) name.focus();
     }
   })();
 
