@@ -19,9 +19,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="/images/alohagirl1.avif" imagesrcset="/images/alohagirl1.avif type(image/avif), /images/alohagirl1.webp type(image/webp), /images/alohagirl1.jpg type(image/jpeg)" />
 
-  <!-- Minimal critical CSS -->
+  <!-- Minimal critical CSS (hero + slideshow) -->
   <style>
     :root { --brand:#2B5A8B; --brand-dark:#1E4161; --text:#333; --bg:#f9f9f9; }
     * { box-sizing:border-box; }
@@ -30,6 +29,7 @@
     a { color:inherit; }
     .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
     .skip-link:focus{left:8px;top:8px;width:auto;height:auto;padding:.5rem 1rem;background:#fff;box-shadow:0 0 0 2px var(--brand);z-index:1000}
+
     .hero { position:relative; min-height:70svh; display:grid; place-items:center; text-align:center; color:#fff; overflow:hidden; }
     .hero .slide{position:absolute; inset:0; opacity:0; transition:opacity 1s ease-in-out; background-position:center; background-size:cover; will-change:opacity;}
     .hero .slide.is-active{opacity:1;}
@@ -39,20 +39,14 @@
     .btn-row{display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
     .btn{display:inline-block; color:#fff; padding:12px 26px; border-radius:999px; text-decoration:none; font-weight:700; min-width:200px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,.1); transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;}
     .btn:hover{transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.15);}
-    /* Signage = brand blue */
     .btn--signage{background:#2B5A8B; border:2px solid #2B5A8B;}
     .btn--signage:hover{background:#1E4161; border-color:#1E4161;}
-    /* Construction = light blue */
     .btn--construction{background:#4A90E2; border:2px solid #4A90E2;}
     .btn--construction:hover{background:#357ABD; border-color:#357ABD;}
     .trust{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:14px;}
     .trust span{display:inline-flex; align-items:center; gap:8px; font-weight:600; background:rgba(0,0,0,.35); padding:6px 10px; border-radius:999px}
     .trust span::before{content:"✓"; color:#E8B20F; font-weight:700;}
     main{display:block;}
-    @media (max-width:768px){ .logo{width:180px} }
-    @media (prefers-reduced-motion: reduce){
-      .hero .slide{transition:none}
-    }
   </style>
 
   <!-- Local business schema -->
@@ -85,25 +79,8 @@
 
 <main id="main">
   <section class="hero" aria-label="Showcase">
-    <!-- Slides -->
-    <div class="slide is-active" style="background-image:
-         linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
-         image-set(url('/images/alohagirl1.avif') type('image/avif'),
-                   url('/images/alohagirl1.webp') type('image/webp'),
-                   url('/images/alohagirl1.jpg') type('image/jpeg'));">
-    </div>
-    <div class="slide" style="background-image:
-         linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
-         image-set(url('/images/alohagirl2.avif') type('image/avif'),
-                   url('/images/alohagirl2.webp') type('image/webp'),
-                   url('/images/alohagirl2.jpg') type('image/jpeg'));">
-    </div>
-    <div class="slide" style="background-image:
-         linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
-         image-set(url('/images/Leigirl1.avif') type('image/avif'),
-                   url('/images/Leigirl1.webp') type('image/webp'),
-                   url('/images/Leigirl1.jpg') type('image/jpeg'));">
-    </div>
+    <!-- Slides will be injected here -->
+    <div id="slides"></div>
 
     <div class="content">
       <h1>Construction and Custom Signage Professionals in Hawaii</h1>
@@ -113,9 +90,10 @@
         <a class="btn btn--signage" href="/signage.html">View Signage</a>
       </div>
       <div class="trust" aria-label="Trust markers">
-        <span>10+ years experience</span>
-        <span>Locally crafted</span>
-        <span>Design consultations and free quotes</span>
+        <span>Experienced professionals</span>
+        <span>Reliable, committed service</span>
+        <span>We care about our customers</span>
+        <span>We take pride in our work</span>
       </div>
     </div>
   </section>
@@ -127,39 +105,87 @@
 <!-- Shared header/footer loader + scroll shrink -->
 <script src="main.js"></script>
 
-<!-- Mark Home active after header is injected -->
+<!-- Build slideshow from /images/signage on GitHub -->
 <script>
+  (function buildAutoSlideshow(){
+    const owner = 'jeremyg91';
+    const repo  = 'OlaniDesign';
+    const path  = 'images/signage';
+    const maxSlides = 7;         // limit how many backgrounds to rotate
+    const intervalMs = 5000;     // 5s per slide
+    const slidesRoot = document.getElementById('slides');
+
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let slideEls = [];
+    let i = 0;
+    let timer;
+
+    function startRotation(){
+      if (media.matches || slideEls.length <= 1) return;
+      timer = setInterval(() => {
+        slideEls[i].classList.remove('is-active');
+        i = (i + 1) % slideEls.length;
+        slideEls[i].classList.add('is-active');
+      }, intervalMs);
+    }
+
+    function stopRotation(){ if (timer) clearInterval(timer); }
+
+    function addSlide(url, active=false){
+      const div = document.createElement('div');
+      div.className = 'slide' + (active ? ' is-active' : '');
+      // gradient overlay + image
+      div.style.backgroundImage =
+        `linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url('${url}')`;
+      slidesRoot.appendChild(div);
+      return div;
+    }
+
+    async function fetchImages(){
+      try {
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`);
+        if (!res.ok) throw new Error('GitHub list failed');
+        // filter to images
+        const files = (await res.json()).filter(f => /\.(png|jpe?g|webp|gif|avif)$/i.test(f.name));
+        if (!files.length) throw new Error('No images found');
+
+        // simple sort: newest-ish first by name; then cap list
+        files.sort((a,b) => a.name < b.name ? 1 : -1);
+        const selected = files.slice(0, maxSlides);
+
+        // inject slides
+        slidesRoot.innerHTML = '';
+        slideEls = selected.map((f, idx) => addSlide(f.download_url, idx === 0));
+
+        // preload remaining
+        selected.slice(1).forEach(f => { const img = new Image(); img.src = f.download_url; });
+
+        startRotation();
+      } catch (e) {
+        // Fallback single background (your chameleon)
+        slidesRoot.innerHTML = '';
+        slideEls = [ addSlide('/images/signage/chameleon.png', true) ];
+      }
+    }
+
+    // accessibility: pause on tab visibility change
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopRotation(); else startRotation();
+    });
+
+    fetchImages();
+  })();
+
+  // Mark Home active after header is injected
   (function markHomeActive(){
     const link = document.querySelector('nav a[href="index.html"], nav a[href="/"]');
     if (link) {
       link.classList.add('active');
       link.setAttribute('aria-current','page');
     } else {
-      // header may not be injected yet—check again shortly
       setTimeout(markHomeActive, 60);
     }
   })();
-
-  // Slideshow (respects reduced motion)
-  const slides = Array.from(document.querySelectorAll('.slide'));
-  let i = 0;
-  const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!media.matches && slides.length > 1) {
-    setInterval(() => {
-      slides[i].classList.remove('is-active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('is-active');
-    }, 5000);
-  }
-
-  // Preload next images
-  slides.slice(1).forEach(s => {
-    const m = /url\(['"]?([^'")]+)['"]?\)/.exec(s.style.backgroundImage);
-    if (m) {
-      const img = new Image();
-      img.src = m[1];
-    }
-  });
 </script>
 </body>
 </html>
