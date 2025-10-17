@@ -43,10 +43,28 @@
     .btn--signage:hover{background:#1E4161; border-color:#1E4161;}
     .btn--construction{background:#4A90E2; border:2px solid #4A90E2;}
     .btn--construction:hover{background:#357ABD; border-color:#357ABD;}
-    .trust{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:14px;}
-    .trust span{display:inline-flex; align-items:center; gap:8px; font-weight:600; background:rgba(0,0,0,.35); padding:6px 10px; border-radius:999px}
-    .trust span::before{content:"✓"; color:#E8B20F; font-weight:700;}
     main{display:block;}
+
+    /* Values grid */
+    .values {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem auto 0;
+      padding: 0 5%;
+      max-width: 1000px;
+      text-align: center;
+    }
+    .value h3 {
+      color: var(--brand, #2B5A8B);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .value p {
+      font-size: 0.95rem;
+      color: #444;
+      margin: 0;
+    }
   </style>
 
   <!-- Local business schema -->
@@ -89,11 +107,25 @@
         <a class="btn btn--construction" href="/construction.html">View Construction</a>
         <a class="btn btn--signage" href="/signage.html">View Signage</a>
       </div>
-      <div class="trust" aria-label="Trust markers">
-        <span>Experienced professionals</span>
-        <span>Reliable, committed service</span>
-        <span>We care about our customers</span>
-        <span>We take pride in our work</span>
+
+      <!-- New values section -->
+      <div class="values" aria-label="Our values">
+        <div class="value">
+          <h3>Experienced Professionals</h3>
+          <p>Our team brings years of skill to every construction and signage project.</p>
+        </div>
+        <div class="value">
+          <h3>Reliable Service</h3>
+          <p>We’re committed to timelines and clear communication.</p>
+        </div>
+        <div class="value">
+          <h3>Customer Care</h3>
+          <p>We care about our customers and treat each project as our own.</p>
+        </div>
+        <div class="value">
+          <h3>Pride in Craft</h3>
+          <p>Every sign and structure is built with precision and local pride.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -111,8 +143,8 @@
     const owner = 'jeremyg91';
     const repo  = 'OlaniDesign';
     const path  = 'images/signage';
-    const maxSlides = 7;         // limit how many backgrounds to rotate
-    const intervalMs = 5000;     // 5s per slide
+    const maxSlides = 7;         
+    const intervalMs = 5000;     
     const slidesRoot = document.getElementById('slides');
 
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -128,13 +160,11 @@
         slideEls[i].classList.add('is-active');
       }, intervalMs);
     }
-
     function stopRotation(){ if (timer) clearInterval(timer); }
 
     function addSlide(url, active=false){
       const div = document.createElement('div');
       div.className = 'slide' + (active ? ' is-active' : '');
-      // gradient overlay + image
       div.style.backgroundImage =
         `linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url('${url}')`;
       slidesRoot.appendChild(div);
@@ -145,30 +175,21 @@
       try {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`);
         if (!res.ok) throw new Error('GitHub list failed');
-        // filter to images
         const files = (await res.json()).filter(f => /\.(png|jpe?g|webp|gif|avif)$/i.test(f.name));
         if (!files.length) throw new Error('No images found');
-
-        // simple sort: newest-ish first by name; then cap list
         files.sort((a,b) => a.name < b.name ? 1 : -1);
         const selected = files.slice(0, maxSlides);
 
-        // inject slides
         slidesRoot.innerHTML = '';
         slideEls = selected.map((f, idx) => addSlide(f.download_url, idx === 0));
-
-        // preload remaining
         selected.slice(1).forEach(f => { const img = new Image(); img.src = f.download_url; });
-
         startRotation();
       } catch (e) {
-        // Fallback single background (your chameleon)
         slidesRoot.innerHTML = '';
         slideEls = [ addSlide('/images/signage/chameleon.png', true) ];
       }
     }
 
-    // accessibility: pause on tab visibility change
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) stopRotation(); else startRotation();
     });
@@ -176,7 +197,6 @@
     fetchImages();
   })();
 
-  // Mark Home active after header is injected
   (function markHomeActive(){
     const link = document.querySelector('nav a[href="index.html"], nav a[href="/"]');
     if (link) {
