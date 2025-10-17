@@ -10,12 +10,15 @@
 
   <style>
     /* Minimal page-specific styles */
-    .hero { padding: 5rem 1rem; text-align:center; }
+    .hero { padding: 5rem 1rem 2rem; text-align:center; }
     .hero h1 { margin-bottom:.5rem; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; padding:1rem 5%; }
+    .intro { max-width: 900px; margin: 0 auto 1.5rem; padding: 0 5%; color:#333; }
+    .intro p { margin: 0 auto; }
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; padding:1rem 5% 2.5rem; }
     .card { border:1px solid #ddd; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,.05); }
     .card img { width:100%; height:240px; object-fit:cover; display:block; }
-    .cap { padding:.7rem .9rem; font-size:.95rem }
+    .cap { padding:.7rem .9rem; font-size:.95rem; color:#333; } /* ensure visible on white */
 
     /* === Lightbox (signage) === */
     .lb-backdrop {
@@ -98,7 +101,9 @@
 <main id="main">
   <section class="hero">
     <h1>Signage</h1>
-    <p>Custom signs, CNC engraving, epoxy finishes, and brand installs.</p>
+    <div class="intro">
+      <p>We design and build custom signs across Hawaii—everything from <strong>engraved oak</strong>, <strong>mahogany</strong>, <strong>mango wood</strong>, and <strong>curly koa</strong> to bold <strong>3D signs</strong>, CNC-routed panels, epoxy inlays, and brand installations. Browse recent work below and click any photo to view it larger.</p>
+    </div>
   </section>
 
   <section class="grid" id="gallery" aria-label="Signage gallery"></section>
