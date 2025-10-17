@@ -9,12 +9,16 @@
   <link rel="stylesheet" href="css/style.css" />
 
   <style>
-    /* Minimal page-specific styles */
+    /* Page-specific: make hero text dark on light background */
     .hero { padding: 5rem 1rem 2rem; text-align:center; }
     .hero h1 { margin-bottom:.5rem; }
+    .hero, .hero h1, .hero p { color:#222 !important; text-shadow:none !important; }
+
+    /* Intro paragraph under the hero */
     .intro { max-width: 900px; margin: 0 auto 1.5rem; padding: 0 5%; color:#333; }
     .intro p { margin: 0 auto; }
 
+    /* Gallery cards */
     .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; padding:1rem 5% 2.5rem; }
     .card { border:1px solid #ddd; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,.05); }
     .card img { width:100%; height:240px; object-fit:cover; display:block; }
@@ -130,25 +134,27 @@
 <script src="main.js"></script>
 
 <script>
-  // === Mark 'Signage' active in header once injected by main.js ===
+  // Mark 'Signage' active once header is injected (main.js inserts header.html)
   document.addEventListener('DOMContentLoaded', () => {
     const markActive = () => {
       const link = document.querySelector('nav a[href="signage.html"]');
-      if (link) link.classList.add('active');
+      if (link) {
+        link.classList.add('active');
+        link.setAttribute('aria-current','page');
+      }
     };
     if (document.querySelector('nav')) markActive();
     else document.addEventListener('olani:header-ready', markActive);
   });
 
-  // === Build gallery from /images/signage ===
+  // Build gallery from /images/signage
   const owner = 'jeremyg91';
   const repo  = 'OlaniDesign';
   const path  = 'images/signage';
 
-  const toTitle = s => s
-    .replace(/[-_]/g, ' ')
-    .replace(/\.(jpe?g|png|webp|gif|avif)$/i, '')
-    .trim();
+  const toTitle = s => s.replace(/[-_]/g, ' ')
+                        .replace(/\.(jpe?g|png|webp|gif|avif)$/i, '')
+                        .trim();
 
   async function loadImages() {
     try {
@@ -160,7 +166,7 @@
       }
       const files = (await res.json()).filter(f => /\.(jpe?g|png|webp|gif|avif)$/i.test(f.name));
 
-      // Optional captions: images/signage.json  -> { "filename.jpg": "Nice caption" }
+      // Optional captions: images/signage.json -> { "filename.jpg": "Nice caption" }
       let caps = {};
       try {
         const c = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/main/images/signage.json`);
@@ -181,7 +187,7 @@
 
       document.getElementById('gallery').innerHTML = html || '<p style="padding:1rem 5%">No images found yet.</p>';
 
-      // Bind click -> open lightbox
+      // Click to open lightbox
       document.querySelectorAll('.signage-item').forEach(a => {
         a.addEventListener('click', (e) => {
           e.preventDefault();
@@ -194,7 +200,7 @@
     }
   }
 
-  // === Lightbox logic ===
+  // Lightbox
   const lbBackdrop = document.getElementById('lb-backdrop');
   const lbWrap = document.getElementById('lb-wrap');
   const lbImg = document.getElementById('lb-img');
@@ -207,7 +213,7 @@
     lbImg.alt = name || 'Signage preview';
     lbCap.textContent = name || '';
 
-    // Build contact link with prefilled subject & message
+    // Prefill contact fields via query params
     const subject = `Signage enquiry: ${name || 'Product'}`;
     const message = `Hi, I'm interested in something similar to "${name}". Please contact me with options and pricing.`;
     const params = new URLSearchParams({ subject, message });
