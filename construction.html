@@ -10,12 +10,15 @@
 
   <style>
     /* Minimal page-specific styles */
-    .hero { padding: 5rem 1rem; text-align:center; }
+    .hero { padding: 5rem 1rem 2rem; text-align:center; }
     .hero h1 { margin-bottom:.5rem; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; padding:1rem 5%; }
+    .intro-text { max-width: 900px; margin: 0 auto 1.5rem; padding: 0 5%; color:#333; text-align:center; }
+    .intro-text p { margin: 0 auto; }
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; padding:1rem 5% 2.5rem; }
     .card { border:1px solid #ddd; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,.05); }
     .card img { width:100%; height:240px; object-fit:cover; display:block; }
-    .cap { padding:.7rem .9rem; font-size:.95rem }
+    .cap { padding:.7rem .9rem; font-size:.95rem; color:#333; } /* visible on white */
   </style>
 </head>
 <body>
@@ -27,7 +30,15 @@
 <main id="main">
   <section class="hero">
     <h1>Construction</h1>
-    <p>Concrete, framing, kitchens &amp; more — recent projects from the field.</p>
+    <div class="intro-text">
+      <p>
+        At Olani Designs, we handle every phase of construction—from solid <strong>foundations</strong> 
+        and precise <strong>concreting</strong> to expert <strong>framing</strong>, detailed 
+        <strong>finish work</strong>, and complete <strong>house builds</strong>. Whether it’s a new home, 
+        an addition, or a full renovation, our team delivers reliable craftsmanship and lasting quality 
+        across Hawaii Island.
+      </p>
+    </div>
   </section>
 
   <section class="grid" id="gallery" aria-label="Construction gallery"></section>
