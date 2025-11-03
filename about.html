@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Olani Designs | Construction & Custom Signs in Hawaii</title>
-  <meta name="description" content="Olani Designs provides construction services and crafts custom signage on Hawaii Island. Learn our story and values." />
+  <meta name="description" content="Olani Designs is a family business on Hawaii Island run by Joe Lopez and Jeremy Gutsohn, providing construction and custom signage with care and craftsmanship." />
   <link rel="canonical" href="https://olanidesign.com/about.html" />
 
   <!-- Social cards -->
@@ -21,22 +21,105 @@
   <link rel="stylesheet" href="css/style.css" />
 
   <style>
-    .about-hero { background:#2B5A8B; color:#fff; text-align:center; padding:60px 20px; }
-    .about-hero h1 { font-size:clamp(2rem,4vw,2.8rem); margin:0; }
+    .about-hero {
+      background:#2B5A8B;
+      color:#fff;
+      text-align:center;
+      padding:60px 20px;
+    }
+    .about-hero h1 {
+      font-size:clamp(2rem,4vw,2.8rem);
+      margin:0;
+    }
 
-    .about-content { display:flex; flex-wrap:wrap; gap:40px; padding:60px 5%; align-items:center; justify-content:center; }
-    .about-text { flex:1 1 400px; }
-    .about-text h2 { color:#2B5A8B; margin-bottom:15px; }
-    .about-text p { margin-bottom:20px; }
+    .about-content {
+      display:flex;
+      flex-wrap:wrap;
+      gap:40px;
+      padding:60px 5%;
+      align-items:center;
+      justify-content:center;
+      max-width:1150px;
+      margin:0 auto;
+    }
+    .about-text {
+      flex:1 1 420px;
+    }
+    .about-text h2 {
+      color:#2B5A8B;
+      margin-bottom:15px;
+    }
+    .about-text p {
+      margin-bottom:18px;
+      line-height:1.7;
+    }
 
-    .about-image { flex:1 1 400px; }
-    .about-image picture, .about-image img { display:block; width:100%; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,.1); }
+    .about-image {
+      flex:1 1 360px;
+    }
+    .about-image picture,
+    .about-image img {
+      display:block;
+      width:100%;
+      border-radius:8px;
+      box-shadow:0 4px 10px rgba(0,0,0,.1);
+    }
 
-    .mission { text-align:center; padding:60px 20px; background:#fff; }
-    .mission h2 { color:#2B5A8B; margin-bottom:20px; }
-    .mission p { font-size:1.1rem; max-width:700px; margin:0 auto; }
+    .mission {
+      text-align:center;
+      padding:50px 20px 40px;
+      background:#fff;
+    }
+    .mission h2 {
+      color:#2B5A8B;
+      margin-bottom:20px;
+    }
+    .mission p {
+      font-size:1.05rem;
+      max-width:760px;
+      margin:0 auto;
+      line-height:1.7;
+    }
 
-    @media (max-width:768px) { .about-content{flex-direction:column} }
+    .values-block {
+      background:#f4f6f9;
+      padding:50px 5% 60px;
+    }
+    .values-block h2 {
+      text-align:center;
+      color:#2B5A8B;
+      margin-bottom:30px;
+    }
+    .values-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+      gap:1.5rem;
+      max-width:1050px;
+      margin:0 auto;
+    }
+    .value-card {
+      background:#fff;
+      border:1px solid rgba(0,0,0,.04);
+      border-radius:10px;
+      padding:1.15rem 1.1rem 1.1rem;
+      box-shadow:0 3px 12px rgba(0,0,0,.03);
+      text-align:left;
+    }
+    .value-card h3 {
+      margin:0 0 .5rem;
+      color:#2B5A8B;
+      font-size:1.05rem;
+    }
+    .value-card p {
+      margin:0;
+      line-height:1.55;
+      color:#444;
+    }
+
+    @media (max-width:768px) {
+      .about-content { flex-direction:column; padding:45px 5%; }
+      .about-image { max-width:570px; }
+    }
   </style>
 
   <!-- Local business schema -->
@@ -46,71 +129,4 @@
     "@type":"LocalBusiness",
     "name":"Olani Designs",
     "url":"https://olanidesign.com",
-    "image":"https://olanidesign.com/assets/img/hero-cover.jpg",
-    "telephone":"+1-808-960-1645",
-    "address":{
-      "@type":"PostalAddress",
-      "streetAddress":"12th Ave",
-      "addressLocality":"Keaau",
-      "addressRegion":"HI",
-      "postalCode":"96749",
-      "addressCountry":"US"
-    },
-    "areaServed":"Hawaii Island",
-    "sameAs":["https://www.instagram.com/OlaniDesign/"]
-  }
-  </script>
-</head>
-<body>
-<a class="skip-link" href="#main">Skip to content</a>
-
-<!-- Shared header include -->
-<div id="site-header"></div>
-
-<main id="main">
-  <section class="about-hero">
-    <h1>Our Story</h1>
-  </section>
-
-  <section class="about-content" aria-label="About Olani Designs">
-    <div class="about-text">
-      <h2>About Olani Designs</h2>
-      <p>Olani Designs provides construction services and builds custom signs on Hawaii Island. Every project is designed in-house and made to order.</p>
-      <p>We combine craftsmanship, durable materials, and local inspiration to deliver reliable results and clear timelines for our clients.</p>
-    </div>
-
-    <div class="about-image">
-      <picture>
-        <source srcset="/images/workshop.avif" type="image/avif">
-        <source srcset="/images/workshop.webp" type="image/webp">
-        <img src="/images/workshop.jpg" alt="Olani Designs workshop on Hawaii Island" width="1200" height="800" loading="lazy" decoding="async">
-      </picture>
-    </div>
-  </section>
-
-  <section class="mission">
-    <h2>Mission</h2>
-    <p>To craft meaningful construction projects and signage that serve homes and businesses with clear design, durable materials, and consistent delivery.</p>
-  </section>
-</main>
-
-<!-- Shared footer include -->
-<div id="site-footer"></div>
-
-<!-- Load shared header/footer + scroll-shrink -->
-<script src="main.js"></script>
-
-<!-- Mark About active once header is injected -->
-<script>
-  (function markAboutActive(){
-    const link = document.querySelector('nav a[href="about.html"]');
-    if (link) {
-      link.classList.add('active');
-      link.setAttribute('aria-current','page');
-    } else {
-      setTimeout(markAboutActive, 60);
-    }
-  })();
-</script>
-</body>
-</html>
+    "image":"
