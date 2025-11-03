@@ -8,36 +8,65 @@
   <meta name="description" content="Construction services and custom signage made on Hawaii Island. Fast quotes. Local pickup and island-wide shipping." />
   <link rel="canonical" href="https://olanidesign.com/" />
 
-  <!-- Social cards -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Olani Designs — Construction & Custom Signage in Hawaii" />
   <meta property="og:description" content="Professional construction and signage for homes and businesses. Local craftsmanship. Free design consults." />
   <meta property="og:url" content="https://olanidesign.com/" />
   <meta property="og:image" content="https://olanidesign.com/assets/img/hero-cover.jpg" />
 
-  <!-- Performance -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Minimal critical CSS (hero + slideshow) -->
   <style>
-    :root { --brand:#2B5A8B; --brand-dark:#1E4161; --text:#333; --bg:#f9f9f9; }
+    :root { --brand:#2B5A8B; --brand-dark:#1E4161; --text:#fff; --bg:#000; }
     * { box-sizing:border-box; }
     html { font-family: Montserrat, Arial, sans-serif; }
-    body { margin:0; line-height:1.6; color:var(--text); background:var(--bg); }
+    body { margin:0; line-height:1.6; color:#fff; background:#000; }
     a { color:inherit; }
     .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
     .skip-link:focus{left:8px;top:8px;width:auto;height:auto;padding:.5rem 1rem;background:#fff;box-shadow:0 0 0 2px var(--brand);z-index:1000}
 
-    .hero { position:relative; min-height:70svh; display:grid; place-items:center; text-align:center; color:#fff; overflow:hidden; }
-    .hero .slide{position:absolute; inset:0; opacity:0; transition:opacity 1s ease-in-out; background-position:center; background-size:cover; will-change:opacity;}
+    .hero {
+      position:relative;
+      min-height:70svh;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:#fff;
+      overflow:hidden;
+    }
+    .hero .slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition:opacity 1s ease-in-out;
+      background-position:center;
+      background-size:cover;
+      will-change:opacity;
+    }
     .hero .slide.is-active{opacity:1;}
-    .hero .content{position:relative; z-index:1; padding:0 1rem; text-shadow:2px 2px 5px rgba(0,0,0,.5);}
-    h1{font-size:clamp(1.8rem,4vw,3rem); margin:0 0 .75rem;}
-    .lead{font-size:clamp(1rem,2.2vw,1.25rem); max-width:52rem; margin:0 auto 1.75rem;}
+    .hero .content{
+      position:relative;
+      z-index:1;
+      padding:0 1rem;
+      text-shadow:2px 2px 5px rgba(0,0,0,.6);
+    }
+    h1{font-size:clamp(1.8rem,4vw,3rem); margin:0 0 .75rem; color:#fff;}
+    .lead{font-size:clamp(1rem,2.2vw,1.25rem); max-width:52rem; margin:0 auto 1.75rem; color:#fff;}
     .btn-row{display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
-    .btn{display:inline-block; color:#fff; padding:12px 26px; border-radius:999px; text-decoration:none; font-weight:700; min-width:200px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,.1); transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;}
+    .btn{
+      display:inline-block;
+      color:#fff;
+      padding:12px 26px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:700;
+      min-width:200px;
+      text-align:center;
+      box-shadow:0 4px 6px rgba(0,0,0,.1);
+      transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
+    }
     .btn:hover{transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.15);}
     .btn--signage{background:#2B5A8B; border:2px solid #2B5A8B;}
     .btn--signage:hover{background:#1E4161; border-color:#1E4161;}
@@ -56,18 +85,17 @@
       text-align: center;
     }
     .value h3 {
-      color: var(--brand, #2B5A8B);
+      color: #fff;
       margin-bottom: 0.5rem;
       font-size: 1.2rem;
     }
     .value p {
       font-size: 0.95rem;
-      color: #444;
+      color: #fff;
       margin: 0;
     }
   </style>
 
-  <!-- Local business schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -92,12 +120,10 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Shared header -->
 <div id="site-header"></div>
 
 <main id="main">
   <section class="hero" aria-label="Showcase">
-    <!-- Slides will be injected here -->
     <div id="slides"></div>
 
     <div class="content">
@@ -108,7 +134,6 @@
         <a class="btn btn--signage" href="/signage.html">View Signage</a>
       </div>
 
-      <!-- New values section -->
       <div class="values" aria-label="Our values">
         <div class="value">
           <h3>Experienced Professionals</h3>
@@ -131,20 +156,17 @@
   </section>
 </main>
 
-<!-- Shared footer -->
 <div id="site-footer"></div>
 
-<!-- Shared header/footer loader + scroll shrink -->
 <script src="main.js"></script>
 
-<!-- Build slideshow from /images/signage on GitHub -->
 <script>
   (function buildAutoSlideshow(){
     const owner = 'jeremyg91';
     const repo  = 'OlaniDesign';
     const path  = 'images/signage';
-    const maxSlides = 7;         
-    const intervalMs = 5000;     
+    const maxSlides = 7;
+    const intervalMs = 5000;
     const slidesRoot = document.getElementById('slides');
 
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -165,8 +187,7 @@
     function addSlide(url, active=false){
       const div = document.createElement('div');
       div.className = 'slide' + (active ? ' is-active' : '');
-      div.style.backgroundImage =
-        `linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url('${url}')`;
+      div.style.backgroundImage = `linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url('${url}')`;
       slidesRoot.appendChild(div);
       return div;
     }
@@ -179,7 +200,6 @@
         if (!files.length) throw new Error('No images found');
         files.sort((a,b) => a.name < b.name ? 1 : -1);
         const selected = files.slice(0, maxSlides);
-
         slidesRoot.innerHTML = '';
         slideEls = selected.map((f, idx) => addSlide(f.download_url, idx === 0));
         selected.slice(1).forEach(f => { const img = new Image(); img.src = f.download_url; });
