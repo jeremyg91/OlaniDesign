@@ -4,18 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact Olani Designs | Construction & Custom Signs in Hawaii</title>
-  <meta name="description" content="Request a quote or ask a question. Olani Designs crafts custom signage and provides construction services on Hawaii Island. Phone (808) 960-1645." />
+  <meta name="description" content="Request a quote or ask a question. Olani Designs crafts custom signage and provides construction services on Hawaii Island." />
   <link rel="canonical" href="https://olanidesign.com/contact.html" />
+
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Contact Olani Designs" />
   <meta property="og:description" content="Get a fast custom quote. Local craft on Hawaii Island." />
   <meta property="og:url" content="https://olanidesign.com/contact.html" />
   <meta property="og:image" content="https://olanidesign.com/assets/img/hero-cover.jpg" />
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -27,14 +30,24 @@
   </section>
 
   <section class="contact-content" aria-label="Contact options">
+    <!-- Contact Form -->
     <div class="contact-form">
       <h2>Send a Message</h2>
+      <div id="prefill-note" class="hint" style="display:none; margin-bottom:8px;">
+        We pre-filled your message from the product you selected.
+      </div>
 
-      <form id="contact-form" action="https://formspree.io/f/your-id" method="POST" novalidate>
+      <!-- ✅ FREE FORM using FormSubmit -->
+      <form id="contact-form" action="https://formsubmit.co/info@olanidesign.com" method="POST" novalidate>
+        <!-- spam honeypot -->
         <div class="sr-only" aria-hidden="true">
           <label for="website">Website</label>
           <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
         </div>
+
+        <!-- Disable FormSubmit’s default thank-you redirect -->
+        <input type="hidden" name="_next" value="https://olanidesign.com/contact.html">
+        <input type="hidden" name="_captcha" value="false">
 
         <div class="form-group">
           <label for="name">Name*</label>
@@ -43,7 +56,8 @@
 
         <div class="form-group">
           <label for="contact">Phone or Email*</label>
-          <input id="contact" name="contact" type="text" autocomplete="on" placeholder="Enter your phone number or email address" required />
+          <input id="contact" name="contact" type="text" placeholder="(808) 960-1645 or your@email.com" required />
+          <div class="hint">You can provide either a phone number or an email.</div>
         </div>
 
         <div class="form-group">
@@ -65,6 +79,7 @@
       </form>
     </div>
 
+    <!-- Contact Info -->
     <div class="contact-info">
       <h2>Get in Touch</h2>
 
@@ -75,18 +90,19 @@
       <p><strong>Address:</strong> 12th Ave, Keaau, HI 96749 <em>(By appointment only)</em></p>
 
       <h3>Business Hours</h3>
-      <p>Mon–Fri: 9:00–17:00 HST</p>
+      <p>Mon–Fri: 9:00 – 17:00 HST</p>
       <p>Sat: By appointment</p>
       <p>Sun: Closed</p>
-      <p><em>Typical response within 1 business day</em></p>
     </div>
   </section>
 </main>
 
 <div id="site-footer"></div>
+
 <script src="main.js"></script>
 
 <script>
+  // Highlight Contact in nav
   (function markContactActive(){
     const link = document.querySelector('nav a[href="contact.html"]');
     if (link) {
@@ -95,39 +111,40 @@
     } else setTimeout(markContactActive, 60);
   })();
 
+  // Prefill subject/message from query string
+  (function prefillFromQuery(){
+    const params = new URLSearchParams(location.search);
+    const subject = params.get('subject');
+    const message = params.get('message');
+    let didPrefill = false;
+    if (subject) { document.getElementById('subject').value = subject; didPrefill = true; }
+    if (message) { document.getElementById('message').value = message; didPrefill = true; }
+    if (didPrefill) document.getElementById('prefill-note').style.display = 'block';
+  })();
+
+  // Validate & show success/error message
   const form = document.getElementById('contact-form');
   const statusEl = document.getElementById('status');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (document.getElementById('website').value) return;
+
+    if (document.getElementById('website').value) return; // honeypot
 
     const nameVal = document.getElementById('name').value.trim();
     const contactVal = document.getElementById('contact').value.trim();
     const messageVal = document.getElementById('message').value.trim();
     const consent = document.getElementById('consent').checked;
 
-    if (!nameVal || !contactVal || !messageVal || !consent) {
+    if (!nameVal || !messageVal || !consent || !contactVal) {
       statusEl.className = 'status err';
       statusEl.textContent = 'Please complete all required fields.';
       return;
     }
 
-    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-    const phonePattern = /^[0-9+()\-.\s]{7,}$/;
-    if (!emailPattern.test(contactVal) && !phonePattern.test(contactVal)) {
-      statusEl.className = 'status err';
-      statusEl.textContent = 'Please enter a valid phone number or email address.';
-      return;
-    }
-
     const data = new FormData(form);
     try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
+      const res = await fetch(form.action, { method:'POST', body:data, headers:{ 'Accept':'application/json' } });
       if (res.ok) {
         form.reset();
         statusEl.className = 'status ok';
