@@ -110,8 +110,13 @@
     <!-- Contact info -->
     <div class="contact-info">
       <h2>Get in Touch</h2>
+
       <p><strong>Email:</strong> <a href="mailto:info@olanidesign.com">info@olanidesign.com</a></p>
-      <p><strong>Phone:</strong> <a href="tel:+18089601645">(808) 960-1645</a></p>
+
+      <!-- NEW: two separate mobile numbers -->
+      <p><strong>Construction (Joe Lopez):</strong> <a href="tel:+18083458997">(808) 345-8997</a></p>
+      <p><strong>Signage (Jeremy Gutsohn):</strong> <a href="tel:+18089601645">(808) 960-1645</a></p>
+
       <p><strong>Address:</strong> 12th Ave, Keaau, HI 96749 <em>(By appointment only)</em></p>
 
       <h3>Business Hours</h3>
@@ -158,23 +163,21 @@
     if (didPrefill) {
       const note = document.getElementById('prefill-note');
       if (note) note.style.display = 'block';
-      // Focus the name field to guide user to start
       const name = document.getElementById('name');
       if (name) name.focus();
     }
   })();
 
-  // Progressive enhancement submit (prevents full-page redirect)
+  // Progressive enhancement submit
   const form = document.getElementById('contact-form');
   const statusEl = document.getElementById('status');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Honeypot check
+    // Honeypot
     if (document.getElementById('website').value) return;
 
-    // Basic required checks
     const required = ['name','email','message','consent'];
     const invalid = required.filter(id => {
       const el = document.getElementById(id);
