@@ -129,4 +129,117 @@
     "@type":"LocalBusiness",
     "name":"Olani Designs",
     "url":"https://olanidesign.com",
-    "image":"
+    "image":"https://olanidesign.com/assets/img/hero-cover.jpg",
+    "telephone":"+1-808-960-1645",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"12th Ave",
+      "addressLocality":"Keaau",
+      "addressRegion":"HI",
+      "postalCode":"96749",
+      "addressCountry":"US"
+    },
+    "areaServed":"Hawaii Island",
+    "sameAs":["https://www.instagram.com/OlaniDesign/"]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Shared header include -->
+<div id="site-header"></div>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="about-hero">
+    <h1>Our Story</h1>
+  </section>
+
+  <!-- STORY -->
+  <section class="about-content" aria-label="About Olani Designs">
+    <div class="about-text">
+      <h2>Family-Owned. Locally Built.</h2>
+      <p>
+        Olani Designs is a family-run business on Hawaiʻi Island, built around two people who love
+        creating — <strong>Joe Lopez</strong> and <strong>Jeremy Gutsohn</strong>.
+      </p>
+      <p>
+        Joe grew up on Oʻahu and now lives on the Big Island with his family. He brings years of
+        experience in <strong>foundations</strong>, <strong>concreting</strong>, <strong>framing</strong>,
+        and <strong>finish work</strong>, and is the lead for our construction projects.
+      </p>
+      <p>
+        Jeremy is from Brisbane, Australia and moved to Hawaiʻi with his family. He specializes in
+        <strong>custom signage</strong>, CNC work, and hardwood pieces — turning customer ideas into
+        real, high-quality signs using materials like mango, mahogany, koa, and cedar.
+      </p>
+      <p>
+        Together, Joe and Jeremy combine construction skill and creative sign-making to offer
+        homeowners and local businesses a one-stop, trustworthy team. You can be confident that
+        your project will be completed with care, clear communication, and real professionalism.
+      </p>
+    </div>
+
+    <div class="about-image">
+      <picture>
+        <source srcset="/images/workshop.avif" type="image/avif">
+        <source srcset="/images/workshop.webp" type="image/webp">
+        <img src="/images/workshop.jpg" alt="Olani Designs workshop on Hawaii Island" width="1200" height="800" loading="lazy" decoding="async">
+      </picture>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission" aria-label="Mission">
+    <h2>Our Mission</h2>
+    <p>
+      To bring island ideas to life — whether that’s a full build, a renovation, or a custom sign —
+      using durable materials, honest workmanship, and a creative approach that reflects Hawaiʻi.
+    </p>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values-block" aria-label="Our values">
+    <h2>What We Care About</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <h3>Local & Personal</h3>
+        <p>We live here, work here, and serve local families and businesses. You’ll talk to Joe or Jeremy — not a call center.</p>
+      </div>
+      <div class="value-card">
+        <h3>Quality Craftsmanship</h3>
+        <p>From concrete to curly koa, we pay attention to details so the final result looks right and lasts.</p>
+      </div>
+      <div class="value-card">
+        <h3>Honest Timelines</h3>
+        <p>We tell you what we can do and when we can do it. Clear estimates, no disappearing.</p>
+      </div>
+      <div class="value-card">
+        <h3>Creative Builds</h3>
+        <p>Because we do both construction and signage, we can help with unique installs, branded spaces, and custom pieces.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Shared footer include -->
+<div id="site-footer"></div>
+
+<!-- Load shared header/footer + scroll-shrink -->
+<script src="main.js"></script>
+
+<!-- Mark About active once header is injected -->
+<script>
+  (function markAboutActive(){
+    const link = document.querySelector('nav a[href="about.html"]');
+    if (link) {
+      link.classList.add('active');
+      link.setAttribute('aria-current','page');
+    } else {
+      setTimeout(markAboutActive, 60);
+    }
+  })();
+</script>
+</body>
+</html>
