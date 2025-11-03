@@ -7,199 +7,89 @@
   <meta name="description" content="Olani Designs is a family business on Hawaii Island run by Joe Lopez and Jeremy Gutsohn, providing construction and custom signage with care and craftsmanship." />
   <link rel="canonical" href="https://olanidesign.com/about.html" />
 
-  <!-- Social cards -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="About Olani Designs" />
   <meta property="og:description" content="Construction and handcrafted signage from Hawaii Island." />
   <meta property="og:url" content="https://olanidesign.com/about.html" />
   <meta property="og:image" content="https://olanidesign.com/assets/img/hero-cover.jpg" />
 
-  <!-- Fonts & CSS -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 
   <style>
-    .about-hero {
-      background:#2B5A8B;
-      color:#fff;
-      text-align:center;
-      padding:60px 20px;
-    }
-    .about-hero h1 {
-      font-size:clamp(2rem,4vw,2.8rem);
-      margin:0;
-    }
+    .about-hero { background:#2B5A8B; color:#fff; text-align:center; padding:60px 20px; }
+    .about-hero h1 { font-size:clamp(2rem,4vw,2.8rem); margin:0; }
 
-    .about-content {
-      display:flex;
-      flex-wrap:wrap;
-      gap:40px;
-      padding:60px 5%;
-      align-items:center;
-      justify-content:center;
-      max-width:1150px;
-      margin:0 auto;
-    }
-    .about-text {
-      flex:1 1 420px;
-    }
-    .about-text h2 {
-      color:#2B5A8B;
-      margin-bottom:15px;
-    }
-    .about-text p {
-      margin-bottom:18px;
-      line-height:1.7;
-    }
+    .about-content { display:flex; flex-wrap:wrap; gap:40px; padding:60px 5%; align-items:center; justify-content:center; max-width:1150px; margin:0 auto; }
+    .about-text { flex:1 1 420px; }
+    .about-text h2 { color:#2B5A8B; margin-bottom:15px; }
+    .about-text p { margin-bottom:18px; line-height:1.7; }
 
-    .about-image {
-      flex:1 1 360px;
-    }
-    .about-image picture,
-    .about-image img {
-      display:block;
-      width:100%;
-      border-radius:8px;
-      box-shadow:0 4px 10px rgba(0,0,0,.1);
-    }
+    .about-image { flex:1 1 360px; }
+    .about-image img { display:block; width:100%; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,.1); }
 
-    .mission {
-      text-align:center;
-      padding:50px 20px 40px;
-      background:#fff;
-    }
-    .mission h2 {
-      color:#2B5A8B;
-      margin-bottom:20px;
-    }
-    .mission p {
-      font-size:1.05rem;
-      max-width:760px;
-      margin:0 auto;
-      line-height:1.7;
-    }
+    .mission { text-align:center; padding:50px 20px 40px; background:#fff; }
+    .mission h2 { color:#2B5A8B; margin-bottom:20px; }
+    .mission p { font-size:1.05rem; max-width:760px; margin:0 auto; line-height:1.7; }
 
-    .values-block {
-      background:#f4f6f9;
-      padding:50px 5% 60px;
-    }
-    .values-block h2 {
-      text-align:center;
-      color:#2B5A8B;
-      margin-bottom:30px;
-    }
-    .values-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
-      gap:1.5rem;
-      max-width:1050px;
-      margin:0 auto;
-    }
-    .value-card {
-      background:#fff;
-      border:1px solid rgba(0,0,0,.04);
-      border-radius:10px;
-      padding:1.15rem 1.1rem 1.1rem;
-      box-shadow:0 3px 12px rgba(0,0,0,.03);
-      text-align:left;
-    }
-    .value-card h3 {
-      margin:0 0 .5rem;
-      color:#2B5A8B;
-      font-size:1.05rem;
-    }
-    .value-card p {
-      margin:0;
-      line-height:1.55;
-      color:#444;
-    }
+    .values-block { background:#f4f6f9; padding:50px 5% 60px; }
+    .values-block h2 { text-align:center; color:#2B5A8B; margin-bottom:30px; }
+    .values-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1.5rem; max-width:1050px; margin:0 auto; }
+    .value-card { background:#fff; border:1px solid rgba(0,0,0,.04); border-radius:10px; padding:1.15rem 1.1rem 1.1rem; box-shadow:0 3px 12px rgba(0,0,0,.03); text-align:left; }
+    .value-card h3 { margin:0 0 .5rem; color:#2B5A8B; font-size:1.05rem; }
+    .value-card p { margin:0; line-height:1.55; color:#444; }
 
-    @media (max-width:768px) {
-      .about-content { flex-direction:column; padding:45px 5%; }
-      .about-image { max-width:570px; }
-    }
+    @media (max-width:768px) { .about-content { flex-direction:column; padding:45px 5%; } .about-image { max-width:570px; } }
   </style>
-
-  <!-- Local business schema -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"LocalBusiness",
-    "name":"Olani Designs",
-    "url":"https://olanidesign.com",
-    "image":"https://olanidesign.com/assets/img/hero-cover.jpg",
-    "telephone":"+1-808-960-1645",
-    "address":{
-      "@type":"PostalAddress",
-      "streetAddress":"12th Ave",
-      "addressLocality":"Keaau",
-      "addressRegion":"HI",
-      "postalCode":"96749",
-      "addressCountry":"US"
-    },
-    "areaServed":"Hawaii Island",
-    "sameAs":["https://www.instagram.com/OlaniDesign/"]
-  }
-  </script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Shared header include -->
 <div id="site-header"></div>
 
 <main id="main">
-  <!-- HERO -->
   <section class="about-hero">
     <h1>Our Story</h1>
   </section>
 
-  <!-- STORY -->
   <section class="about-content" aria-label="About Olani Designs">
     <div class="about-text">
       <h2>Family-Owned. Locally Built.</h2>
       <p>
-        Olani Designs is a family-run business on Hawaiʻi Island, built around two people who love
-        creating — <strong>Joe Lopez</strong> and <strong>Jeremy Gutsohn</strong>.
+        Olani Designs is a family-run business on Hawaiʻi Island, built around two people who love creating —
+        <strong>Joe Lopez</strong> and <strong>Jeremy Gutsohn</strong>.
       </p>
       <p>
-        Joe grew up on Oʻahu and now lives on the Big Island with his family. He brings years of
-        experience in <strong>foundations</strong>, <strong>concreting</strong>, <strong>framing</strong>,
-        and <strong>finish work</strong>, and is the lead for our construction projects.
+        Joe grew up on Oʻahu and now lives on the Big Island with his family. He brings years of experience in
+        <strong>foundations</strong>, <strong>concreting</strong>, <strong>framing</strong>, and <strong>finish work</strong>,
+        and is the lead for our construction projects.
       </p>
       <p>
-        Jeremy is from Brisbane, Australia and moved to Hawaiʻi with his family. He specializes in
-        <strong>custom signage</strong>, CNC work, and hardwood pieces — turning customer ideas into
-        real, high-quality signs using materials like mango, mahogany, koa, and cedar.
+        Jeremy is from Brisbane, Australia and moved to Hawaiʻi with his family. He specializes in <strong>custom signage</strong>,
+        CNC work, and hardwood pieces — turning customer ideas into real, high-quality signs using materials like mango, mahogany, koa, and cedar.
       </p>
       <p>
-        Together, Joe and Jeremy combine construction skill and creative sign-making to offer
-        homeowners and local businesses a one-stop, trustworthy team. You can be confident that
-        your project will be completed with care, clear communication, and real professionalism.
+        Together, Joe and Jeremy combine construction skill and creative sign-making to offer homeowners and local businesses a
+        one-stop, trustworthy team. You can be confident that your project will be completed with care, clear communication,
+        and real professionalism.
       </p>
     </div>
 
-    <div class="about-image">
-      <picture>
-        <source srcset="/images/workshop.avif" type="image/avif">
-        <source srcset="/images/workshop.webp" type="image/webp">
-        <img src="/images/workshop.jpg" alt="Olani Designs workshop on Hawaii Island" width="1200" height="800" loading="lazy" decoding="async">
-      </picture>
+    <div class="about-image" id="about-image">
+      <!-- Image will be loaded dynamically -->
     </div>
   </section>
 
-  <!-- MISSION -->
   <section class="mission" aria-label="Mission">
     <h2>Our Mission</h2>
     <p>
-      To bring island ideas to life — whether that’s a full build, a renovation, or a custom sign —
-      using durable materials, honest workmanship, and a creative approach that reflects Hawaiʻi.
+      To bring island ideas to life — whether that’s a full build, a renovation, or a custom sign — using durable materials,
+      honest workmanship, and a creative approach that reflects Hawaiʻi.
     </p>
   </section>
 
-  <!-- VALUES -->
   <section class="values-block" aria-label="Our values">
     <h2>What We Care About</h2>
     <div class="values-grid">
@@ -223,23 +113,38 @@
   </section>
 </main>
 
-<!-- Shared footer include -->
 <div id="site-footer"></div>
 
-<!-- Load shared header/footer + scroll-shrink -->
 <script src="main.js"></script>
 
-<!-- Mark About active once header is injected -->
 <script>
+  // Highlight "About" in nav
   (function markAboutActive(){
     const link = document.querySelector('nav a[href="about.html"]');
-    if (link) {
-      link.classList.add('active');
-      link.setAttribute('aria-current','page');
-    } else {
-      setTimeout(markAboutActive, 60);
-    }
+    if (link) { link.classList.add('active'); link.setAttribute('aria-current','page'); }
+    else setTimeout(markAboutActive, 60);
   })();
+
+  // === Dynamically load 1 image from /images ===
+  const owner = 'jeremyg91';
+  const repo  = 'OlaniDesign';
+  const path  = 'images';
+
+  async function loadAboutImage() {
+    try {
+      const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`);
+      if (!res.ok) return;
+      const files = (await res.json()).filter(f => /\.(jpe?g|png|webp|avif)$/i.test(f.name));
+      if (files.length > 0) {
+        document.getElementById('about-image').innerHTML = `
+          <img src="${files[0].download_url}" alt="Olani Designs Hawaii team" loading="lazy" decoding="async">
+        `;
+      }
+    } catch (e) {
+      console.error('Image load failed:', e);
+    }
+  }
+  loadAboutImage();
 </script>
 </body>
 </html>
