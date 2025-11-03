@@ -6,46 +6,19 @@
   <title>Contact Olani Designs | Construction & Custom Signs in Hawaii</title>
   <meta name="description" content="Request a quote or ask a question. Olani Designs crafts custom signage and provides construction services on Hawaii Island. Phone (808) 960-1645." />
   <link rel="canonical" href="https://olanidesign.com/contact.html" />
-
-  <!-- Social cards -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Contact Olani Designs" />
   <meta property="og:description" content="Get a fast custom quote. Local craft on Hawaii Island." />
   <meta property="og:url" content="https://olanidesign.com/contact.html" />
   <meta property="og:image" content="https://olanidesign.com/assets/img/hero-cover.jpg" />
-
-  <!-- Fonts & CSS -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-
-  <!-- Local business schema -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"LocalBusiness",
-    "name":"Olani Designs",
-    "url":"https://olanidesign.com",
-    "telephone":"+1-808-960-1645",
-    "image":"https://olanidesign.com/assets/img/hero-cover.jpg",
-    "address":{
-      "@type":"PostalAddress",
-      "streetAddress":"12th Ave",
-      "addressLocality":"Keaau",
-      "addressRegion":"HI",
-      "postalCode":"96749",
-      "addressCountry":"US"
-    },
-    "areaServed":"Hawaii Island",
-    "email":"info@olanidesign.com"
-  }
-  </script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Shared header include -->
 <div id="site-header"></div>
 
 <main id="main">
@@ -54,18 +27,10 @@
   </section>
 
   <section class="contact-content" aria-label="Contact options">
-    <!-- Form -->
     <div class="contact-form">
       <h2>Send a Message</h2>
 
-      <!-- Prefill notice (hidden until we have query params) -->
-      <div id="prefill-note" class="hint" style="display:none; margin-bottom:8px;">
-        We pre-filled your message from the product you selected.
-      </div>
-
-      <!-- Replace action with your Formspree endpoint -->
       <form id="contact-form" action="https://formspree.io/f/your-id" method="POST" novalidate>
-        <!-- spam honeypot -->
         <div class="sr-only" aria-hidden="true">
           <label for="website">Website</label>
           <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
@@ -76,17 +41,9 @@
           <input id="name" name="name" type="text" autocomplete="name" required />
         </div>
 
-        <!-- Email no longer hard-required -->
         <div class="form-group">
-          <label for="email">Email (or phone)*</label>
-          <input id="email" name="email" type="email" autocomplete="email" />
-          <div class="hint">You can send this form with just your phone number.</div>
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Phone (or email)*</label>
-          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
-                 pattern="^[0-9+()\\-\\s]{7,}$" placeholder="(808) 960-1645" />
+          <label for="contact">Phone or Email*</label>
+          <input id="contact" name="contact" type="text" autocomplete="on" placeholder="Enter your phone number or email address" required />
         </div>
 
         <div class="form-group">
@@ -108,13 +65,10 @@
       </form>
     </div>
 
-    <!-- Contact info -->
     <div class="contact-info">
       <h2>Get in Touch</h2>
 
       <p><strong>Email:</strong> <a href="mailto:info@olanidesign.com">info@olanidesign.com</a></p>
-
-      <!-- Two separate mobile numbers -->
       <p><strong>Construction (Joe Lopez):</strong> <a href="tel:+18083458997">(808) 345-8997</a></p>
       <p><strong>Signage (Jeremy Gutsohn):</strong> <a href="tel:+18089601645">(808) 960-1645</a></p>
 
@@ -124,87 +78,55 @@
       <p>Mon–Fri: 9:00–17:00 HST</p>
       <p>Sat: By appointment</p>
       <p>Sun: Closed</p>
+      <p><em>Typical response within 1 business day</em></p>
     </div>
   </section>
 </main>
 
-<!-- Shared footer include -->
 <div id="site-footer"></div>
-
-<!-- Load shared header/footer + scroll-shrink -->
 <script src="main.js"></script>
 
 <script>
-  // Mark Contact active once header is injected (main.js inserts header)
   (function markContactActive(){
     const link = document.querySelector('nav a[href="contact.html"]');
     if (link) {
       link.classList.add('active');
       link.setAttribute('aria-current','page');
-    } else {
-      setTimeout(markContactActive, 60);
-    }
+    } else setTimeout(markContactActive, 60);
   })();
 
-  // Prefill subject/message from query string (e.g., ?subject=...&message=...)
-  (function prefillFromQuery(){
-    const params = new URLSearchParams(location.search);
-    const subject = params.get('subject');
-    const message = params.get('message');
-
-    let didPrefill = false;
-    if (subject) {
-      const s = document.getElementById('subject');
-      if (s) { s.value = subject; didPrefill = true; }
-    }
-    if (message) {
-      const m = document.getElementById('message');
-      if (m) { m.value = message; didPrefill = true; }
-    }
-    if (didPrefill) {
-      const note = document.getElementById('prefill-note');
-      if (note) note.style.display = 'block';
-      const name = document.getElementById('name');
-      if (name) name.focus();
-    }
-  })();
-
-  // Progressive enhancement submit
   const form = document.getElementById('contact-form');
   const statusEl = document.getElementById('status');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    // Honeypot
     if (document.getElementById('website').value) return;
 
-    const nameVal    = document.getElementById('name').value.trim();
-    const emailVal   = document.getElementById('email').value.trim();
-    const phoneVal   = document.getElementById('phone').value.trim();
+    const nameVal = document.getElementById('name').value.trim();
+    const contactVal = document.getElementById('contact').value.trim();
     const messageVal = document.getElementById('message').value.trim();
-    const consent    = document.getElementById('consent').checked;
+    const consent = document.getElementById('consent').checked;
 
-    // Real required fields
-    if (!nameVal || !messageVal || !consent) {
+    if (!nameVal || !contactVal || !messageVal || !consent) {
       statusEl.className = 'status err';
-      statusEl.textContent = 'Please complete the required fields.';
+      statusEl.textContent = 'Please complete all required fields.';
       return;
     }
 
-    // MUST have at least one contact method
-    if (!emailVal && !phoneVal) {
+    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    const phonePattern = /^[0-9+()\-.\s]{7,}$/;
+    if (!emailPattern.test(contactVal) && !phonePattern.test(contactVal)) {
       statusEl.className = 'status err';
-      statusEl.textContent = 'Please provide either an email or a phone number.';
+      statusEl.textContent = 'Please enter a valid phone number or email address.';
       return;
     }
 
     const data = new FormData(form);
     try {
-      const res = await fetch(form.action, { 
-        method:'POST',
-        body:data,
-        headers:{ 'Accept':'application/json' }
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
         form.reset();
