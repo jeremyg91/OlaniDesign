@@ -76,16 +76,17 @@
           <input id="name" name="name" type="text" autocomplete="name" required />
         </div>
 
+        <!-- Email no longer hard-required -->
         <div class="form-group">
-          <label for="email">Email*</label>
-          <input id="email" name="email" type="email" autocomplete="email" required />
+          <label for="email">Email (or phone)*</label>
+          <input id="email" name="email" type="email" autocomplete="email" />
+          <div class="hint">You can send this form with just your phone number.</div>
         </div>
 
         <div class="form-group">
-          <label for="phone">Phone</label>
+          <label for="phone">Phone (or email)*</label>
           <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
                  pattern="^[0-9+()\\-\\s]{7,}$" placeholder="(808) 960-1645" />
-          <div class="hint">Optional</div>
         </div>
 
         <div class="form-group">
@@ -113,7 +114,7 @@
 
       <p><strong>Email:</strong> <a href="mailto:info@olanidesign.com">info@olanidesign.com</a></p>
 
-      <!-- NEW: two separate mobile numbers -->
+      <!-- Two separate mobile numbers -->
       <p><strong>Construction (Joe Lopez):</strong> <a href="tel:+18083458997">(808) 345-8997</a></p>
       <p><strong>Signage (Jeremy Gutsohn):</strong> <a href="tel:+18089601645">(808) 960-1645</a></p>
 
@@ -178,24 +179,37 @@
     // Honeypot
     if (document.getElementById('website').value) return;
 
-    const required = ['name','email','message','consent'];
-    const invalid = required.filter(id => {
-      const el = document.getElementById(id);
-      return el.type === 'checkbox' ? !el.checked : !el.value.trim();
-    });
-    if (invalid.length) {
+    const nameVal    = document.getElementById('name').value.trim();
+    const emailVal   = document.getElementById('email').value.trim();
+    const phoneVal   = document.getElementById('phone').value.trim();
+    const messageVal = document.getElementById('message').value.trim();
+    const consent    = document.getElementById('consent').checked;
+
+    // Real required fields
+    if (!nameVal || !messageVal || !consent) {
       statusEl.className = 'status err';
       statusEl.textContent = 'Please complete the required fields.';
       return;
     }
 
+    // MUST have at least one contact method
+    if (!emailVal && !phoneVal) {
+      statusEl.className = 'status err';
+      statusEl.textContent = 'Please provide either an email or a phone number.';
+      return;
+    }
+
     const data = new FormData(form);
     try {
-      const res = await fetch(form.action, { method:'POST', body:data, headers:{ 'Accept':'application/json' } });
+      const res = await fetch(form.action, { 
+        method:'POST',
+        body:data,
+        headers:{ 'Accept':'application/json' }
+      });
       if (res.ok) {
         form.reset();
         statusEl.className = 'status ok';
-        statusEl.textContent = 'Thanks—your message has been sent.';
+        statusEl.textContent = 'Thanks — your message has been sent.';
       } else {
         statusEl.className = 'status err';
         statusEl.textContent = 'There was a problem sending your message. Please try again.';
