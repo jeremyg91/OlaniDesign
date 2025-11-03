@@ -9,16 +9,53 @@
   <link rel="stylesheet" href="css/style.css" />
 
   <style>
-    /* Minimal page-specific styles */
-    .hero { padding: 5rem 1rem 2rem; text-align:center; }
-    .hero h1 { margin-bottom:.5rem; }
-    .intro-text { max-width: 900px; margin: 0 auto 1.5rem; padding: 0 5%; color:#333; text-align:center; }
-    .intro-text p { margin: 0 auto; }
+    /* Page-specific tweaks */
+    .hero {
+      padding: 5rem 1rem 1.5rem;
+      text-align: center;
+    }
+    .hero h1 {
+      margin-bottom: .75rem;
+      color: #000;              /* make heading black */
+      font-size: clamp(2rem, 4vw, 2.6rem);
+    }
+    .intro-text {
+      max-width: 950px;
+      margin: 0 auto 1.25rem;
+      padding: 0 5%;
+      color: #333;
+      text-align: center;
+      font-size: 1.05rem;       /* bigger text */
+      line-height: 1.7;
+    }
+    .intro-text strong {
+      font-weight: 700;
+    }
+    .hero .btn-row {
+      margin-top: 1rem;
+      justify-content: center;
+    }
 
-    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; padding:1rem 5% 2.5rem; }
-    .card { border:1px solid #ddd; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,.05); }
-    .card img { width:100%; height:240px; object-fit:cover; display:block; }
-    .cap { padding:.7rem .9rem; font-size:.95rem; color:#333; } /* visible on white */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+      padding: 1rem 5% 2.5rem;
+    }
+    .card {
+      border: 1px solid #ddd;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,.05);
+    }
+    .card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    /* no captions on construction */
   </style>
 </head>
 <body>
@@ -32,12 +69,17 @@
     <h1>Construction</h1>
     <div class="intro-text">
       <p>
-        At Olani Designs, we handle every phase of construction—from solid <strong>foundations</strong> 
-        and precise <strong>concreting</strong> to expert <strong>framing</strong>, detailed 
-        <strong>finish work</strong>, and complete <strong>house builds</strong>. Whether it’s a new home, 
-        an addition, or a full renovation, our team delivers reliable craftsmanship and lasting quality 
-        across Hawaii Island.
+        At Olani Designs, we handle every phase of construction — from solid <strong>foundations</strong>
+        and precise <strong>concreting</strong> to expert <strong>framing</strong>, detailed
+        <strong>finish work</strong>, and complete <strong>house builds</strong>. Whether it’s a new home,
+        an addition, or a renovation, we focus on reliable timelines and clean workmanship for Hawaiʻi Island.
       </p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--construction"
+         href="contact.html?subject=Construction%20enquiry&message=Hi%2C%20I%E2%80%99d%20like%20to%20ask%20about%20a%20construction%20project.%20Please%20contact%20me%20with%20next%20steps.">
+        Enquire now
+      </a>
     </div>
   </section>
 
@@ -77,21 +119,9 @@
       }
       const files = (await res.json()).filter(f => /\.(jpe?g|png|webp|gif|avif)$/i.test(f.name));
 
-      // Optional captions from images/construction.json
-      let caps = {};
-      try {
-        const c = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/main/images/construction.json`);
-        if (c.ok) caps = await c.json();
-      } catch(_) {}
-
-      const toTitle = s => s
-        .replace(/[-_]/g, ' ')
-        .replace(/\.(jpe?g|png|webp|gif|avif)$/i, '');
-
       const html = files.map(f => `
         <article class="card">
-          <img loading="lazy" decoding="async" src="${f.download_url}" alt="${toTitle(f.name)}">
-          <div class="cap">${caps[f.name] || toTitle(f.name)}</div>
+          <img loading="lazy" decoding="async" src="${f.download_url}" alt="${f.name.replace(/\.(jpe?g|png|webp|gif|avif)$/i, '')}">
         </article>
       `).join('');
 
